@@ -1,0 +1,36 @@
+{
+  "name": "azure-data-science-academy-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local learning dashboard for the Azure Data Science Academy. Reads the Markdown dossier directly.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "highlight.js": "~11.11.2",
+    "js-yaml": "~4.3.2",
+    "marked": "~16.4.2",
+    "mermaid": "~11.17.2",
+    "minisearch": "~7.2.0",
+    "react": "~19.2.8",
+    "react-dom": "~19.2.8"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "~4.0.9",
+    "@types/node": "^22.10.0",
+    "@types/react": "~19.2.18",
+    "@types/react-dom": "~19.2.7",
+    "@vitejs/plugin-react": "~5.2.0",
+    "typescript": "~5.9.3",
+    "vite": "~7.3.7",
+    "vitest": "~3.2.7"
+  }
+}

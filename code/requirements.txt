@@ -1,0 +1,12 @@
+# Course code dependencies (tested with Python 3.13 on Linux; 3.10+ expected to work)
+numpy>=2.0
+pandas>=2.2
+pyarrow>=17
+deltalake>=1.0
+pyyaml>=6.0
+pytest>=8.0
+# Azure (lab 01 and ADLS Gen2 lake paths)
+azure-identity>=1.23
+azure-mgmt-resource>=24.0
+azure-mgmt-resource-subscriptions>=1.0
+azure-storage-file-datalake>=12.20

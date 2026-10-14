@@ -1,0 +1,19 @@
+id: supply-chain.demand-forecast
+name: Demand forecast
+domain: supply-chain
+type: consumer-aligned
+status: planned           # built in the capstone (Module 10)
+version: 0.1.0
+owner: forecasting-owner@contoso.example
+team: demand-planning
+description: Weekly product-store demand forecasts with prediction intervals, used for replenishment.
+tags: [forecasting, ml-output]
+classification: internal
+input_ports:
+  - product: supply-chain.demand-features
+output_ports:
+  - name: delta
+    format: delta
+    location: gold/demand_forecast
+    contract: null
+sla: {freshness_hours: 168}

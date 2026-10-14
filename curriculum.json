@@ -1,0 +1,144 @@
+{
+  "title": "Azure Data Science Academy",
+  "tagline": "Design, build, deploy and operate data science and AI systems on Microsoft Azure.",
+  "version": "0.1.0",
+  "objectives": [
+    "Navigate Azure's control plane (tenants, subscriptions, resource groups, RBAC) and work securely from WSL, VS Code and Python.",
+    "Explain how data lakes, warehouses, lakehouses, medallion layers and data mesh fit together, and map each to concrete Azure services.",
+    "Build governed data products on ADLS Gen2, Azure Databricks or Microsoft Fabric, with contracts, quality checks and catalog entries.",
+    "Train, track, register and deploy models with Azure Machine Learning and MLflow, then automate them with CI/CD and IaC.",
+    "Build production-grade RAG and agentic services with Microsoft Foundry and Azure AI Search.",
+    "Operate everything within budget, with identity-based auth, network isolation and observability."
+  ],
+  "sequence": "Start with Module 1 and Lab 01, then Module 3 (the architectural core, runnable locally), then the remaining modules in order. The retail demand forecasting capstone grows a little in every lab.",
+  "recommendedPath": [
+    "m1-azure-fundamentals",
+    "lab-01-azure-setup",
+    "m3-lakehouse-medallion",
+    "m3-data-mesh",
+    "lab-03-lakehouse",
+    "architecture-decision-guide",
+    "m2-m4-data-engineering-roadmap",
+    "m5-m6-azure-ml-roadmap",
+    "m7-mlops-roadmap",
+    "m8-genai-roadmap",
+    "m9-security-roadmap",
+    "retail-forecasting-capstone"
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "number": 1,
+      "title": "Azure Fundamentals for Data Scientists",
+      "description": "Tenants, subscriptions, resource groups, regions, Entra ID, RBAC, managed identities, Key Vault, budgets and a secure WSL dev setup.",
+      "estimatedHours": 6,
+      "status": "available",
+      "docsPath": "docs/azure-fundamentals",
+      "labs": [
+        "lab-01-azure-setup"
+      ]
+    },
+    {
+      "id": "m2",
+      "number": 2,
+      "title": "Cloud Storage and Data Access",
+      "description": "Blob Storage vs ADLS Gen2, hierarchical namespace, ACLs, reading and writing Parquet with pandas/PyArrow/adlfs, Azure SQL Database and access patterns.",
+      "estimatedHours": 6,
+      "status": "planned",
+      "docsPath": "docs/storage-and-data-engineering",
+      "labs": [
+        "lab-02-cloud-storage"
+      ]
+    },
+    {
+      "id": "m3",
+      "number": 3,
+      "title": "Data Lakes, Lakehouses and Data Mesh",
+      "description": "Lake vs warehouse vs lakehouse, medallion layers, Delta Lake and Iceberg, OneLake vs ADLS Gen2, Databricks vs Fabric, data products, contracts and federated governance.",
+      "estimatedHours": 12,
+      "status": "available",
+      "docsPath": "docs/lakehouse",
+      "labs": [
+        "lab-03-lakehouse"
+      ]
+    },
+    {
+      "id": "m4",
+      "number": 4,
+      "title": "Data Pipelines and Scalable Processing",
+      "description": "Azure Data Factory and Fabric Data Factory, Databricks Jobs, PySpark, incremental ingestion and CDC, data validation and pipeline testing.",
+      "estimatedHours": 8,
+      "status": "planned",
+      "docsPath": "docs/storage-and-data-engineering",
+      "labs": [
+        "lab-04-data-pipelines"
+      ]
+    },
+    {
+      "id": "m5",
+      "number": 5,
+      "title": "Azure Machine Learning Fundamentals",
+      "description": "Workspaces, compute, environments, data assets, components, command jobs, MLflow tracking, sweeps and reproducibility.",
+      "estimatedHours": 8,
+      "status": "planned",
+      "docsPath": "docs/azure-machine-learning",
+      "labs": [
+        "lab-05-model-training"
+      ]
+    },
+    {
+      "id": "m6",
+      "number": 6,
+      "title": "Model Management and Deployment",
+      "description": "Model registry and versioning, managed online endpoints, batch endpoints, FastAPI integration, auth, scaling and release criteria.",
+      "estimatedHours": 6,
+      "status": "planned",
+      "docsPath": "docs/azure-machine-learning",
+      "labs": [
+        "lab-06-model-deployment"
+      ]
+    },
+    {
+      "id": "m7",
+      "number": 7,
+      "title": "MLOps and Production Operations",
+      "description": "Training pipelines, GitHub Actions with OIDC, Bicep/Terraform, testing, drift, monitoring, alerting, retraining and lineage.",
+      "estimatedHours": 10,
+      "status": "planned",
+      "docsPath": "docs/mlops",
+      "labs": []
+    },
+    {
+      "id": "m8",
+      "number": 8,
+      "title": "Azure AI and Generative AI",
+      "description": "Microsoft Foundry (formerly Azure AI Foundry), model deployments, embeddings, Azure AI Search, RAG ingestion, FastAPI AI services, agents, evaluation and cost.",
+      "estimatedHours": 10,
+      "status": "planned",
+      "docsPath": "docs/generative-ai",
+      "labs": []
+    },
+    {
+      "id": "m9",
+      "number": 9,
+      "title": "Enterprise Architecture, Security and Governance",
+      "description": "Landing zones, environment separation, private endpoints, Key Vault, Purview classification and lineage, responsible AI, tagging and cost allocation.",
+      "estimatedHours": 8,
+      "status": "planned",
+      "docsPath": "docs/security-and-costs",
+      "labs": []
+    },
+    {
+      "id": "m10",
+      "number": 10,
+      "title": "End-to-End Capstone: Retail Demand Forecasting",
+      "description": "Local baseline, medallion lakehouse, governed data products, Azure ML training pipeline, batch and online inference, monitoring and cost optimisation.",
+      "estimatedHours": 20,
+      "status": "planned",
+      "docsPath": "projects/retail-demand-forecasting",
+      "labs": [
+        "lab-07-end-to-end-capstone"
+      ]
+    }
+  ]
+}

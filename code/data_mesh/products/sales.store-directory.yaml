@@ -1,0 +1,19 @@
+id: sales.store-directory
+name: Store directory
+domain: sales
+type: source-aligned
+status: published
+version: 1.0.0
+owner: store-ops-owner@contoso.example
+team: sales-data-eng
+description: Master data for stores (location, size, format). Conformed identifiers used by every domain.
+tags: [master-data, stores]
+classification: internal
+input_ports:
+  - source: system:erp
+output_ports:
+  - name: delta
+    format: delta
+    location: silver/stores
+    contract: null   # TODO: write the contract (exercise)
+sla: {freshness_hours: 24}

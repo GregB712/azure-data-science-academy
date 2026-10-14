@@ -1,0 +1,21 @@
+id: sales.daily-sales-summary
+name: Daily sales by store and category
+domain: sales
+type: aggregate
+status: published
+version: 1.0.0
+owner: sales-data-owner@contoso.example
+team: sales-data-eng
+description: Daily units, revenue, promo and stock-out counts by store, region and category for BI.
+tags: [sales, bi, gold]
+classification: internal
+input_ports:
+  - product: sales.pos-transactions
+  - product: supply-chain.product-catalog
+  - product: sales.store-directory
+output_ports:
+  - name: delta
+    format: delta
+    location: gold/daily_sales_store_category
+    contract: null
+sla: {freshness_hours: 30}

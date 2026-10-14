@@ -1,0 +1,20 @@
+id: customer.loyalty-segments
+name: Loyalty customer segments
+domain: customer-analytics
+type: consumer-aligned
+status: planned
+version: 0.1.0
+owner: customer-insights-owner@contoso.example
+team: customer-analytics
+description: Pseudonymised loyalty-member segments (RFM and lifecycle stage) per store catchment.
+tags: [customer, segmentation, pii-derived]
+classification: highly-confidential
+input_ports:
+  - source: system:loyalty-crm
+  - product: sales.store-directory
+output_ports:
+  - name: delta
+    format: delta
+    location: gold/loyalty_segments
+    contract: null
+sla: {freshness_hours: 168}

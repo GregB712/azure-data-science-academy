@@ -1,0 +1,47 @@
+# Data contract for the Forecasting domain's weekly demand feature table (Gold).
+# Consumed by the model training pipeline (Module 5) and by analysts.
+# Simplified ODCS v3 structure; see sales.pos_sales.v1.yaml for notes.
+apiVersion: v3.0.2
+kind: DataContract
+id: 0b9e2a71-forecasting-demand-features
+name: weekly_demand_features
+version: 1.0.0
+status: active
+domain: supply-chain
+dataProduct: demand-forecasting-features
+description:
+  purpose: Weekly product-store demand history with lag features for model training.
+  usage: Training and backtesting of demand forecasting models.
+  limitations: Weeks with stock-outs are flagged, not imputed.
+team:
+  - username: forecasting-owner@contoso.example
+    role: Data Product Owner
+schema:
+  - name: weekly_demand_features
+    physicalName: gold/weekly_demand_features
+    physicalType: delta_table
+    quality:
+      - rule: unique
+        columns: [week_start, store_id, product_id]
+      - rule: rowCount
+        mustBeGreaterThan: 0
+    properties:
+      - {name: week_start, logicalType: date, required: true, primaryKey: true}
+      - {name: store_id, logicalType: string, required: true, primaryKey: true}
+      - {name: product_id, logicalType: string, required: true, primaryKey: true}
+      - {name: category, logicalType: string, required: true}
+      - name: units
+        logicalType: integer
+        required: true
+        quality: [{rule: range, mustBeGreaterThanOrEqualTo: 0}]
+      - {name: avg_price, logicalType: number, required: true}
+      - {name: promo_days, logicalType: integer, required: true}
+      - {name: stockout_days, logicalType: integer, required: true}
+      - {name: holiday_days, logicalType: integer, required: true}
+      - {name: units_lag_1, logicalType: number, required: false}
+      - {name: units_lag_2, logicalType: number, required: false}
+      - {name: units_lag_52, logicalType: number, required: false}
+      - {name: units_roll_mean_4, logicalType: number, required: false}
+slaProperties:
+  - {property: frequency, value: 1, unit: w}
+  - {property: latency, value: 24, unit: h}

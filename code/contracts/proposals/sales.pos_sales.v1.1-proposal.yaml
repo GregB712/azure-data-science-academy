@@ -1,0 +1,109 @@
+# PROPOSAL (used in the data mesh lesson exercise): the Sales team wants to rename
+# `stockout` to `is_stockout` and add an optional `basket_count` column, and has
+# proposed this as a MINOR version. Run data_mesh/contract_compat.py to see why CI rejects it.
+#
+# Data contract for the Sales domain's "POS sales" data product (Silver output port).
+#
+# Structure follows the Open Data Contract Standard (ODCS) v3 in simplified form
+# (https://bitol-io.github.io/open-data-contract-standard/). The `quality` entries use
+# a small, course-specific rule vocabulary that code/lakehouse_local/quality.py
+# enforces. Validate against the official ODCS JSON schema before adopting this
+# format in production.
+apiVersion: v3.0.2
+kind: DataContract
+id: 7d1f3c52-sales-pos-sales
+name: pos_sales
+version: 1.1.0
+status: active
+domain: sales
+dataProduct: sales-transactions
+tenant: contoso-retail
+description:
+  purpose: Cleaned, de-duplicated daily point-of-sale sales per store and product.
+  usage: Demand forecasting, replenishment analytics, finance revenue reconciliation.
+  limitations: >
+    units_sold is censored by stock availability. Use the stockout flag to avoid
+    biasing demand models. Closed-store days have no rows (not zero rows).
+team:
+  - username: sales-data-owner@contoso.example
+    role: Data Product Owner
+  - username: sales-data-eng@contoso.example
+    role: Data Engineer
+schema:
+  - name: pos_sales
+    physicalName: silver/sales
+    physicalType: delta_table
+    description: One row per date, store and product.
+    quality:
+      - rule: unique
+        columns: [date, store_id, product_id]
+      - rule: rowCount
+        mustBeGreaterThan: 0
+    properties:
+      - name: date
+        logicalType: date
+        required: true
+        primaryKey: true
+      - name: store_id
+        logicalType: string
+        required: true
+        primaryKey: true
+        quality:
+          - rule: pattern
+            pattern: "^S\\d{3}$"
+          - rule: referential
+            reference: stores.store_id
+      - name: product_id
+        logicalType: string
+        required: true
+        primaryKey: true
+        quality:
+          - rule: pattern
+            pattern: "^P\\d{4}$"
+          - rule: referential
+            reference: products.product_id
+      - name: units_sold
+        logicalType: integer
+        required: true
+        quality:
+          - rule: range
+            mustBeGreaterThanOrEqualTo: 0
+      - name: unit_price
+        logicalType: number
+        required: true
+        quality:
+          - rule: range
+            mustBeGreaterThan: 0
+      - name: on_promotion
+        logicalType: boolean
+        required: true
+      - name: promo_discount_pct
+        logicalType: integer
+        required: true
+        quality:
+          - rule: range
+            mustBeGreaterThanOrEqualTo: 0
+            mustBeLessThanOrEqualTo: 90
+      - name: stock_on_hand_open
+        logicalType: integer
+        required: false
+      - name: is_stockout
+        logicalType: boolean
+        required: true
+      - name: basket_count
+        logicalType: integer
+        required: false
+      - name: revenue
+        logicalType: number
+        required: true
+        classification: confidential
+slaProperties:
+  - property: frequency
+    value: 1
+    unit: d
+  - property: latency        # data for day D available by
+    value: 6
+    unit: h                  # 06:00 UTC on D+1
+  - property: retention
+    value: 7
+    unit: y

@@ -1,0 +1,20 @@
+id: finance.revenue-reconciliation
+name: Revenue reconciliation
+domain: finance
+type: aggregate
+status: planned
+version: 0.1.0
+owner: finance-data-owner@contoso.example
+team: finance-analytics
+description: Daily POS revenue reconciled against the general ledger, with variance flags.
+tags: [finance, reconciliation]
+classification: confidential
+input_ports:
+  - product: sales.pos-transactions
+  - source: system:general-ledger
+output_ports:
+  - name: delta
+    format: delta
+    location: gold/revenue_reconciliation
+    contract: null
+sla: {freshness_hours: 48}

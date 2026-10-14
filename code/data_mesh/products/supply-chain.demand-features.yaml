@@ -1,0 +1,20 @@
+id: supply-chain.demand-features
+name: Weekly demand features
+domain: supply-chain
+type: consumer-aligned
+status: published
+version: 1.0.0
+owner: forecasting-owner@contoso.example
+team: demand-planning
+description: Weekly product-store demand with lags and promo/stock-out/holiday signals for model training.
+tags: [forecasting, features, ml]
+classification: internal
+input_ports:
+  - product: sales.pos-transactions
+  - product: supply-chain.product-catalog
+output_ports:
+  - name: delta
+    format: delta
+    location: gold/weekly_demand_features
+    contract: ../../contracts/forecasting.demand_features.v1.yaml
+sla: {freshness_hours: 48}

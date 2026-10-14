@@ -1,0 +1,21 @@
+id: sales.pos-transactions
+name: POS transactions
+domain: sales
+type: source-aligned
+status: published
+version: 1.0.0
+owner: sales-data-owner@contoso.example
+team: sales-data-eng
+description: Cleaned daily point-of-sale sales per store and product. The authoritative sales fact for the company.
+tags: [sales, pos, daily]
+classification: confidential
+input_ports:
+  - source: system:pos-export        # operational system, not a data product
+  - product: sales.store-directory
+  - product: supply-chain.product-catalog
+output_ports:
+  - name: delta
+    format: delta
+    location: silver/sales
+    contract: ../../contracts/sales.pos_sales.v1.yaml
+sla: {freshness_hours: 30, availability: "99.5%"}

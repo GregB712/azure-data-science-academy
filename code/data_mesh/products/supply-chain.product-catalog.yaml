@@ -1,0 +1,19 @@
+id: supply-chain.product-catalog
+name: Product catalog
+domain: supply-chain
+type: source-aligned
+status: published
+version: 1.0.0
+owner: merchandising-owner@contoso.example
+team: supply-chain-data
+description: Product master data (category, list price, perishability).
+tags: [master-data, products]
+classification: internal
+input_ports:
+  - source: system:pim
+output_ports:
+  - name: delta
+    format: delta
+    location: silver/products
+    contract: null
+sla: {freshness_hours: 24}

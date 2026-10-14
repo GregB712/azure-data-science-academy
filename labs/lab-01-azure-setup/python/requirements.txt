@@ -1,0 +1,6 @@
+azure-identity>=1.23
+azure-mgmt-resource>=24.0
+azure-mgmt-resource-subscriptions>=1.0
+azure-storage-file-datalake>=12.20
+pyarrow>=17
+pytest>=8.0
