@@ -144,3 +144,7 @@ Not verified:
 - **Nothing was run against a real Azure subscription**, Databricks workspace, Fabric capacity or Purview account. Azure steps are written from current Microsoft documentation and cited inline, but you are the first to run them.
 - External links were not checked automatically (the build environment could not reach learn.microsoft.com directly).
 - Microsoft Fabric trial terms could not be re-checked at writing time; confirm the current trial length and capacity on the [Fabric trial page](https://learn.microsoft.com/fabric/fundamentals/fabric-trial) before relying on it.
+
+## License
+
+Released under the [MIT License](LICENSE). The code and the written course content are free to use, modify and redistribute with attribution. "Azure", "Microsoft" and related product names are trademarks of Microsoft; this is an independent, unofficial learning resource.

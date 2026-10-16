@@ -20,6 +20,11 @@ venv/
 *.key
 *.pem
 
+# Personal / local instructions (not part of the public course)
+CLAUDE_Guidelines.md
+CLAUDE.md
+.claude/
+
 # OS / editor
 .DS_Store
 Thumbs.db
