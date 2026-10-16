@@ -1,3 +1,8 @@
 node_modules/
 dist/
 *.log
+
+# Local env (the committed template is .env.example)
+.env
+.env.*
+!.env.example

@@ -37,26 +37,49 @@ function read(): ProgressState {
   }
 }
 
+/**
+ * Where progress is persisted:
+ *  - 'local'   no authentication configured: this browser's localStorage (default).
+ *  - 'guest'   auth on, signed out: in-memory only, nothing is saved.
+ *  - 'account' auth on, signed in: saved by the injected sink (Clerk user metadata).
+ * The auth layer calls `configure` when the user signs in or out; without it the
+ * store behaves exactly as before (local, localStorage).
+ */
+export type ProgressMode = 'local' | 'guest' | 'account'
+type Sink = (s: ProgressState) => void
+
+const localStorageSink: Sink = (next) => window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+
 let state: ProgressState = typeof window === 'undefined' ? emptyState() : read()
+let mode: ProgressMode = 'local'
+let sink: Sink | null = typeof window === 'undefined' ? null : localStorageSink
 let persistent = true
 const listeners = new Set<() => void>()
 
+function emit() {
+  listeners.forEach((l) => l())
+}
+
 function commit(next: ProgressState) {
   state = next
-  try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-    persistent = true
-  } catch {
-    persistent = false
+  if (sink) {
+    try {
+      sink(next)
+      persistent = true
+    } catch {
+      persistent = false
+    }
+  } else {
+    persistent = false // guest: in-memory only
   }
-  listeners.forEach((l) => l())
+  emit()
 }
 
 if (typeof window !== 'undefined') {
   window.addEventListener('storage', (e) => {
-    if (e.key === STORAGE_KEY) {
+    if (mode === 'local' && e.key === STORAGE_KEY) {
       state = parseState(e.newValue)
-      listeners.forEach((l) => l())
+      emit()
     }
   })
 }
@@ -64,6 +87,15 @@ if (typeof window !== 'undefined') {
 export const progressStore = {
   get: () => state,
   isPersistent: () => persistent,
+  mode: () => mode,
+  /** Switch persistence target and replace the state in one step (auth layer uses this). */
+  configure(opts: { mode: ProgressMode; sink: Sink | null; initial: ProgressState }) {
+    mode = opts.mode
+    sink = opts.sink
+    persistent = opts.sink !== null
+    state = opts.initial
+    emit()
+  },
   subscribe(l: () => void) {
     listeners.add(l)
     return () => listeners.delete(l)

@@ -24,6 +24,7 @@ const markdown = import.meta.glob(
 const raw = import.meta.glob(
   [
     '../../../*.json',
+    '../../../LICENSE',
     '../../../code/**/*.{py,yaml,yml,txt,ini}',
     '../../../labs/**/*.{sh,py,bicep,txt,example}',
     '../../../docs/_templates/*.md',

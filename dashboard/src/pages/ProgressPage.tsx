@@ -7,6 +7,7 @@ export default function ProgressPage() {
   const s = useProgress()
   const file = useRef<HTMLInputElement>(null)
   const [msg, setMsg] = useState('')
+  const mode = progressStore.mode()
   const overall = progressFor(content.docs, s)
   const completed = Object.entries(s.completed).sort((a, b) => b[1].localeCompare(a[1]))
 
@@ -29,7 +30,13 @@ export default function ProgressPage() {
   return (
     <div className="page">
       <h1>Progress</h1>
-      {!progressStore.isPersistent() && (
+      {mode === 'account' && (
+        <p className="panel" role="status">Your progress is saved to your account and follows you across devices and browsers.</p>
+      )}
+      {mode === 'guest' && (
+        <p className="warning" role="alert">You are browsing as a guest, so progress is not saved. Sign in to save it to your account. You can still export it below to keep a copy.</p>
+      )}
+      {mode === 'local' && !progressStore.isPersistent() && (
         <p className="warning" role="alert">This browser is blocking localStorage, so progress will be lost when you close the tab. Export it to keep it.</p>
       )}
       <section className="panel">
@@ -77,12 +84,27 @@ export default function ProgressPage() {
         </div>
         {msg && <p className="small" role="status">{msg}</p>}
         <h3>Where progress is stored, and its limits</h3>
-        <ul className="small">
-          <li>Progress lives in this browser’s <code>localStorage</code> under the key <code>{STORAGE_KEY}</code>. No server, account or cloud service is involved.</li>
-          <li>It is per browser profile and per origin: <code>http://localhost:5173</code> (dev) and <code>http://localhost:4173</code> (preview) keep separate progress.</li>
-          <li>Clearing site data, private windows, or another machine all start empty. Use Export/Import to move or back it up.</li>
-          <li>Ticks in Markdown files on disk (<a href="#/doc/PROGRESS">PROGRESS.md</a>) are a separate, manual record that you can commit to Git.</li>
-        </ul>
+        {mode === 'account' ? (
+          <ul className="small">
+            <li>Progress is saved to your account (in your Clerk user profile) and syncs across devices and browsers.</li>
+            <li>Guest progress made before you signed in was merged into your account on first sign-in.</li>
+            <li>Deleting your account from the profile menu also deletes this saved progress.</li>
+            <li>Ticks in Markdown files on disk (<a href="#/doc/PROGRESS">PROGRESS.md</a>) are a separate, manual record that you can commit to Git.</li>
+          </ul>
+        ) : mode === 'guest' ? (
+          <ul className="small">
+            <li>You are not signed in, so progress is kept only in memory for this session and is not saved anywhere.</li>
+            <li>Reloading or closing the tab clears it. Sign in to save progress, or Export it below to keep a copy.</li>
+            <li>Ticks in Markdown files on disk (<a href="#/doc/PROGRESS">PROGRESS.md</a>) are a separate, manual record that you can commit to Git.</li>
+          </ul>
+        ) : (
+          <ul className="small">
+            <li>Progress lives in this browser’s <code>localStorage</code> under the key <code>{STORAGE_KEY}</code>. No server, account or cloud service is involved.</li>
+            <li>It is per browser profile and per origin: <code>http://localhost:5173</code> (dev) and <code>http://localhost:4173</code> (preview) keep separate progress.</li>
+            <li>Clearing site data, private windows, or another machine all start empty. Use Export/Import to move or back it up.</li>
+            <li>Ticks in Markdown files on disk (<a href="#/doc/PROGRESS">PROGRESS.md</a>) are a separate, manual record that you can commit to Git.</li>
+          </ul>
+        )}
       </section>
     </div>
   )

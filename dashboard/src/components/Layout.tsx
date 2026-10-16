@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { AuthControls, GuestBanner } from '../auth/clerk'
 import { content } from '../content/load'
 import { docHref } from '../lib/links'
 import { navigate, useRoute } from '../lib/router'
@@ -144,8 +145,10 @@ export default function Layout({ children }: { children: ReactNode }) {
           >
             {theme === 'dark' ? '☀' : '☾'}
           </button>
+          <AuthControls />
         </header>
         <main id="main" tabIndex={-1}>
+          <GuestBanner />
           {children}
         </main>
       </div>

@@ -105,6 +105,13 @@ button:hover, .btn:hover { border-color: var(--accent); text-decoration: none; }
 .btn.ghost { background: transparent; }
 button.danger { color: var(--danger); border-color: var(--danger); }
 .button-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+/* ---------- authentication */
+.auth-controls { display: flex; gap: 0.5rem; align-items: center; margin-left: auto; }
+.auth-banner { display: flex; gap: 0.75rem 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 0.7rem 1rem; margin-bottom: 1rem; }
+.auth-banner p { margin: 0; max-width: 60ch; }
+.auth-banner-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.profile-progress h1 { margin-top: 0; }
 .filters { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin: 1rem 0; }
 .filters input[type='search'] { flex: 1 1 260px; }
 .chips { display: flex; gap: 0.35rem; flex-wrap: wrap; }

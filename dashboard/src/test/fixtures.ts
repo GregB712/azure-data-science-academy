@@ -20,7 +20,7 @@ const all = walk(ROOT)
 const isMd = (p: string) =>
   p.endsWith('.md') && !p.startsWith('docs/_templates/') && (!p.includes('/') || /^(docs|labs|projects|diagrams|references)\//.test(p))
 const isRaw = (p: string) =>
-  (/^[^/]+\.json$/.test(p) || /^code\/.*\.(py|yaml|yml|txt|ini)$/.test(p) || /^labs\/.*\.(sh|py|bicep|txt|example)$/.test(p) || /^docs\/_templates\/[^/]+\.md$/.test(p))
+  (/^[^/]+\.json$/.test(p) || p === 'LICENSE' || /^code\/.*\.(py|yaml|yml|txt|ini)$/.test(p) || /^labs\/.*\.(sh|py|bicep|txt|example)$/.test(p) || /^docs\/_templates\/[^/]+\.md$/.test(p))
 
 const read = (p: string) => readFileSync(join(ROOT, p), 'utf8')
 export const markdownFiles = Object.fromEntries(all.filter(isMd).map((p) => [p, read(p)]))
