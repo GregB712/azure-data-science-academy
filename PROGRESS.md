@@ -32,6 +32,13 @@ Two ways to track progress:
 - [ ] Data mesh exercises 1-5
 - [ ] Completed [Lab 03](labs/lab-03-lakehouse/README.md)
 
+## Module 5: Azure Machine Learning
+- [ ] Read [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md)
+- [ ] Read [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md)
+- [ ] Read [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md)
+- [ ] Ran the local backtest (WAPE ~0.23, MASE < 1) and compared runs in `mlflow ui`
+- [ ] Completed [Lab 05](labs/lab-05-model-training/README.md) (tasks 1-4 local; 5-7 optional on Azure)
+
 ## Reference work
 - [ ] Wrote my first ADR using the [decision guide](ARCHITECTURE_DECISION_GUIDE.md) template
 

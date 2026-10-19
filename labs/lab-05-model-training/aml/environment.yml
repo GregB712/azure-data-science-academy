@@ -1,0 +1,9 @@
+# Custom Azure ML environment: a Microsoft base image + the conda.yaml deps.
+# Register with:  az ml environment create -f environment.yml
+# The workspace builds this image once (in its Container Registry) and caches it.
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: demand-forecast-env
+version: "1"
+image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
+conda_file: conda.yaml
+description: LightGBM + delta-rs + MLflow for the retail demand forecasting training job.

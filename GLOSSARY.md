@@ -37,6 +37,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure service
 - The control-plane API (`management.azure.com`) behind the portal, CLI, SDKs, Bicep and Terraform.
 
+### Backtesting (rolling-origin)
+- **Kind:** Concept
+- Evaluating a forecaster on a time-ordered split where every test period is strictly later than the training data, with an expanding window - unlike random k-fold, which leaks the future. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
+
 ### Batch endpoint
 - **Kind:** Azure capability
 - Azure ML endpoint that runs asynchronous scoring jobs over large inputs on compute clusters that scale to zero.
@@ -61,9 +65,25 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Open source
 - Optional Delta Lake feature recording row-level changes per table version, for incremental downstream processing.
 
+### Command job (Azure ML)
+- **Kind:** Azure capability
+- An Azure ML job that runs one command on a compute target with a code snapshot, a pinned environment and typed inputs/outputs. Omitting the compute target runs it on serverless compute. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
+
+### Component (Azure ML)
+- **Kind:** Azure capability
+- A self-contained, versioned pipeline step with typed inputs/outputs, authored in YAML or Python (`@command_component`) and reused across pipelines. See [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md).
+
+### Compute instance / cluster / serverless (Azure ML)
+- **Kind:** Azure capability
+- The three ways to get Azure ML compute: a single-user **compute instance** (bills until stopped; use idle shutdown), an autoscaling **compute cluster** (free at `min_instances=0`), and **serverless compute** (no cluster to manage; the default when a job omits its compute target). See [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md).
+
 ### Control plane / data plane
 - **Kind:** Concept
 - Control plane manages resources (ARM, roles like Owner/Contributor). Data plane accesses the contents (blobs, secrets, model inference; roles like Storage Blob Data Reader). See [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md#32-control-plane-vs-data-plane-the-single-most-important-idea).
+
+### Data asset (Azure ML)
+- **Kind:** Azure capability
+- A versioned reference to data in Azure ML, of type `uri_file`, `uri_folder` or `mltable`. The course registers the Gold Delta table as a `uri_folder` and reads it with identity-based auth. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
 
 ### Data contract
 - **Kind:** Pattern
@@ -133,9 +153,17 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure service
 - Microsoft's identity platform, formerly Azure Active Directory.
 
+### Environment (Azure ML)
+- **Kind:** Azure capability
+- A versioned definition of a job's runtime (base image + conda/pip packages). **Curated** environments are Microsoft-maintained (no build); **custom** ones build an image into the workspace Container Registry. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
+
 ### Federated computational governance
 - **Kind:** Pattern
 - Data mesh principle: global policies agreed by domain and central representatives, enforced automatically by the platform.
+
+### Forecast accuracy (WAPE, MASE, bias)
+- **Kind:** Concept
+- **WAPE** = sum|y-yhat| / sum|y| (volume-weighted error, defined when actuals are zero). **MASE** = model MAE / in-sample naive MAE; < 1 beats the naive baseline. **Bias** = sum(yhat-y)/sum(y), signed (positive = over-forecast). See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
 
 ### Foundry (Microsoft Foundry)
 - **Kind:** Azure service
@@ -260,6 +288,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Subscription
 - **Kind:** Azure capability
 - Billing, quota and access boundary containing resource groups.
+
+### Sweep (hyperparameter)
+- **Kind:** Azure capability
+- An Azure ML job that runs a command across a search space, optimising a primary metric logged to MLflow, with sampling (random/grid/bayesian) and early termination (e.g. `BanditPolicy`) to bound cost. See [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md).
 
 ### Tenant
 - **Kind:** Concept

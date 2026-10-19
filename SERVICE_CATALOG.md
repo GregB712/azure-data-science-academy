@@ -253,7 +253,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** LightGBM forecasting training pipeline, hyperparameter sweeps, weekly batch forecasts.
 - **Cost model:** The workspace is free; you pay for compute (per VM-hour), associated storage, container registry, Key Vault and Application Insights; endpoints bill per instance while deployed.
 - **Watch out:** Compute instances run until stopped (use idle shutdown); low default GPU quota.
-- **Lessons:** Modules 5–7 (planned), [roadmap](docs/azure-machine-learning/README.md)
+- **Lessons:** [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md), [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md), [Lab 05](labs/lab-05-model-training/README.md); Modules 6–7 (planned)
 - **Docs:** https://learn.microsoft.com/azure/machine-learning/overview-what-is-azure-machine-learning
 
 ### Microsoft Foundry
@@ -299,7 +299,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Custom training and inference images.
 - **Cost model:** Per day by tier (Basic/Standard/Premium) + storage.
 - **Watch out:** Azure ML creates one per workspace on first image build; it keeps billing after experiments end.
-- **Lessons:** Module 5–6 (planned)
+- **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md); Module 6 (planned)
 - **Docs:** https://learn.microsoft.com/azure/container-registry/container-registry-intro
 
 ### Azure Monitor and Application Insights
@@ -367,5 +367,16 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Logging forecasting metrics and models; comparing runs.
 - **Cost model:** Free; the backing workspace bills.
 - **Watch out:** Feature parity differs between hosted MLflow implementations.
-- **Lessons:** Module 5 (planned)
+- **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md)
 - **Docs:** https://learn.microsoft.com/azure/machine-learning/concept-mlflow
+
+### LightGBM
+- **Category:** Open formats & OSS
+- **Kind:** Open source (integrated with Azure)
+- **What it is:** Gradient-boosting framework for tabular data, with native categorical handling and objectives (including Tweedie/Poisson) suited to retail demand counts.
+- **Role in the architecture:** The course's demand forecasting model, trained locally and as an Azure ML job on the Gold feature table.
+- **Typical DS/AI uses:** Weekly product-store demand forecasting; hyperparameter sweeps over learning rate and tree size.
+- **Cost model:** Free; runs on CPU (no GPU required for the course).
+- **Watch out:** Squared-error objectives chase a few high-volume series; Tweedie/MAE objectives fit demand better. MASE < 1 means it beats the naive baseline.
+- **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md)
+- **Docs:** https://lightgbm.readthedocs.io/en/latest/

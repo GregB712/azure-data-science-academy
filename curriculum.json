@@ -80,7 +80,7 @@
       "title": "Azure Machine Learning Fundamentals",
       "description": "Workspaces, compute, environments, data assets, components, command jobs, MLflow tracking, sweeps and reproducibility.",
       "estimatedHours": 8,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/azure-machine-learning",
       "labs": [
         "lab-05-model-training"

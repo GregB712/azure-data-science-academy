@@ -13,14 +13,20 @@ summary: Planned lessons and labs for training, tracking, registering and deploy
 
 # Modules 5-6 Roadmap: Azure Machine Learning and Model Deployment
 
-**Status: planned.** This page is the design for the next build phase, so you can see where the curriculum goes and extend it consistently. Nothing below is implemented yet unless linked.
+**Module 5 is built; Module 6 is planned.** Module 5's lessons and lab are written and verified (links below); this page remains the design for Module 6 so you can see where the curriculum goes and extend it consistently.
+
+**Module 5 (available):**
+- [5.1-5.2 Workspace, compute and costs](01-workspace-compute-and-costs.md)
+- [5.3-5.6 Jobs, data and experiment tracking](02-jobs-data-and-tracking.md)
+- [5.7-5.8 Sweeps, components and pipelines](03-sweeps-components-and-pipelines.md)
+- [Lab 05: Train and backtest the demand model](../../labs/lab-05-model-training/README.md)
 
 ## Starting point you already have
 
 - Gold feature table `gold/weekly_demand_features` with a data contract ([contract](../../code/contracts/forecasting.demand_features.v1.yaml)), produced locally or on ADLS Gen2 ([lakehouse lesson](../lakehouse/01-lake-warehouse-lakehouse-medallion.md)).
 - A storage account with Entra-only auth ([Lab 01](../../labs/lab-01-azure-setup/README.md)).
 
-## Module 5 lessons (planned)
+## Module 5 lessons (built - see links above)
 
 | # | Lesson | Key content | Official docs |
 |---|---|---|---|
@@ -33,7 +39,7 @@ summary: Planned lessons and labs for training, tracking, registering and deploy
 | 5.7 | Sweeps | Hyperparameter search for LightGBM, early termination, cost control | [Hyperparameter tuning](https://learn.microsoft.com/azure/machine-learning/how-to-tune-hyperparameters) |
 | 5.8 | Components and pipelines | Reusable components: validate → features → train → evaluate | [Pipelines](https://learn.microsoft.com/azure/machine-learning/concept-ml-pipelines) |
 
-**Lab 05 (planned): model training.** Local baseline first (LightGBM with temporal backtesting on the Gold table, metrics WAPE/MASE/bias), then the same script as an Azure ML command job on serverless compute, tracked with MLflow, followed by a 3-step pipeline. Local alternative: run MLflow locally with `mlflow ui`.
+**Lab 05 (built): model training.** Local baseline first (LightGBM with temporal backtesting on the Gold table, metrics WAPE/MASE/bias), then the same script as an Azure ML command job on serverless compute, tracked with MLflow, followed by a 3-step validate-train-evaluate pipeline. Local alternative: run MLflow locally with `mlflow ui`. See [Lab 05](../../labs/lab-05-model-training/README.md).
 
 ## Module 6 lessons (planned)
 

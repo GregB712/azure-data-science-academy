@@ -46,7 +46,7 @@ flowchart LR
 | Stage | Scope | Status | Where |
 |---|---|---|---|
 | 1. Local baseline: data | Synthetic dataset: dates, products/categories, stores/geography, sales, prices, promotions, holidays, stock-outs, injected defects | **Implemented and tested** | [`code/retail_data/generate.py`](../../code/retail_data/generate.py) |
-| 1. Local baseline: model | Validation, feature engineering, LightGBM, temporal backtesting, WAPE/MASE/bias, reproducible run | Planned (Lab 05) | — |
+| 1. Local baseline: model | Validation, feature engineering, LightGBM, temporal backtesting, WAPE/MASE/bias, reproducible run | **Implemented and tested** (seed 42: WAPE ~0.23, MASE 0.71, ~33% better than naive) | [`code/forecasting/`](../../code/forecasting/), [Lab 05](../../labs/lab-05-model-training/README.md) |
 | 2. Azure data platform | Bronze/Silver/Gold on Delta, quality checks, quarantine, idempotent MERGE; same code targets ADLS Gen2 | **Implemented locally and tested**; ADLS Gen2 path written but not run in the build environment | [`code/lakehouse_local/`](../../code/lakehouse_local/), [lesson](../../docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md) |
 | 3. Data products and governance | Sales and forecasting data products, contracts, ownership, freshness, registry, breaking-change gate; Azure mapping (Purview, Unity Catalog, Fabric) | **Implemented locally and tested** (registry + contracts); Azure catalog steps are documented procedures | [`code/data_mesh/`](../../code/data_mesh/), [`code/contracts/`](../../code/contracts/), [lesson](../../docs/data-mesh/01-data-mesh.md) |
 | 4. Azure ML | Tracked training, registered versions, reusable pipeline, automated evaluation and promotion | Planned (Module 5) | [roadmap](../../docs/azure-machine-learning/README.md) |
@@ -63,6 +63,8 @@ pip install -r requirements.txt
 python retail_data/generate.py --out ../data/raw --seed 42
 python lakehouse_local/medallion.py all --raw ../data/raw --lake ../data/lake
 python data_mesh/registry.py validate
+python -m forecasting.validate --data ../data/lake/gold/weekly_demand_features
+python -m forecasting.train    --data ../data/lake/gold/weekly_demand_features --output ../data/model
 python -m pytest
 ```
 

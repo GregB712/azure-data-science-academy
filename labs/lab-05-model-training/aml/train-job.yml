@@ -1,0 +1,38 @@
+# Azure ML command job (CLI v2): the SAME forecasting.train script, on serverless
+# compute. Submit with:
+#   az ml job create -f train-job.yml --web
+# Omitting `compute` runs the job on serverless compute (Azure provisions, scales
+# and tears down the node). See the Module 5 jobs lesson for the SDK equivalent.
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+display_name: demand-forecast-train
+experiment_name: retail-demand-forecasting
+
+# The code snapshot is the academy's code/ folder, so `python -m forecasting.train`
+# and its `lakehouse_local` import both resolve inside the job.
+code: ../../../code
+command: >-
+  python -m forecasting.train
+  --data ${{inputs.gold}}
+  --output ${{outputs.model}}
+  --n-estimators ${{inputs.n_estimators}}
+  --n-splits ${{inputs.n_splits}}
+
+inputs:
+  # A registered data asset pointing at gold/weekly_demand_features on ADLS Gen2.
+  # uri_folder mounts the Delta table folder; the script reads it with delta-rs.
+  gold:
+    type: uri_folder
+    path: azureml:weekly_demand_features@latest
+  n_estimators: 300
+  n_splits: 4
+
+outputs:
+  model:
+    type: uri_folder          # model.txt + metrics.json land here (and in the datastore)
+
+environment: azureml:demand-forecast-env@latest
+
+# No `compute:` key -> serverless. To pin a size, uncomment:
+# resources:
+#   instance_type: Standard_E4s_v3
