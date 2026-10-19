@@ -13,7 +13,14 @@ summary: Planned lessons for automating the forecasting system end to end - trai
 
 # Module 7 Roadmap: MLOps and Production Operations
 
-**Status: planned.**
+**Module 7 is built.** Its lessons are written and verified (links below); the tables further down record the original design.
+
+**Module 7 (available):**
+- [7.1-7.3 CI/CD with GitHub Actions, OIDC and IaC](07-cicd-and-iac.md)
+- [7.4-7.6 Production pipelines, scheduling, monitoring and drift](08-pipelines-and-monitoring.md)
+- [7.7 Retraining policy, lineage and the loop](09-retraining-and-lineage.md)
+
+The hands-on lives in the repo itself: `.github/workflows/ci.yml` runs the tests, content and contract checks; [`code/forecasting/monitor.py`](../../code/forecasting/monitor.py) provides the drift/accuracy signals. Module 7 has no separate lab (its artifacts are the CI workflow, the monitoring code, and the IaC).
 
 ## Target architecture
 
@@ -31,7 +38,7 @@ flowchart LR
   mon --> appi["Azure Monitor + App Insights"]
 ```
 
-## Planned lessons
+## Lessons (built - see links above)
 
 | # | Lesson | Key content | Official docs |
 |---|---|---|---|

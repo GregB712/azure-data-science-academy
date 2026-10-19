@@ -46,6 +46,13 @@ Two ways to track progress:
 - [ ] Produced `gold/demand_forecast` and ran the FastAPI service locally
 - [ ] Completed [Lab 06](labs/lab-06-model-deployment/README.md) (tasks 1-4 local; 5-8 optional; billable endpoints deleted)
 
+## Module 7: MLOps and production operations
+- [ ] Read [CI/CD, OIDC and IaC](docs/mlops/07-cicd-and-iac.md)
+- [ ] Read [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md)
+- [ ] Read [Retraining and lineage](docs/mlops/09-retraining-and-lineage.md)
+- [ ] Ran the drift/accuracy monitor and the retrain decision locally
+- [ ] Ran the repo's CI checks locally (pytest + check_content + registry validate + dashboard)
+
 ## Reference work
 - [ ] Wrote my first ADR using the [decision guide](ARCHITECTURE_DECISION_GUIDE.md) template
 

@@ -310,7 +310,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Tracing a FastAPI forecasting service; alerting when a batch job fails.
 - **Cost model:** Mostly per GB ingested and retained in Log Analytics.
 - **Watch out:** Verbose logging can cost more than the service you monitor; set sampling and retention.
-- **Lessons:** Module 7 (planned)
+- **Lessons:** [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md)
 - **Docs:** https://learn.microsoft.com/azure/azure-monitor/overview
 
 ### Bicep
@@ -321,7 +321,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Lab 01's storage account and role assignment; per-domain platform modules.
 - **Cost model:** Free.
 - **Watch out:** Role assignment names must be deterministic GUIDs (`guid()`), or redeployments fail.
-- **Lessons:** [Lab 01](labs/lab-01-azure-setup/README.md), Module 7 (planned)
+- **Lessons:** [Lab 01](labs/lab-01-azure-setup/README.md), [CI/CD, OIDC and IaC](docs/mlops/07-cicd-and-iac.md)
 - **Docs:** https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview
 
 ### GitHub Actions
@@ -332,7 +332,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Running `pytest` and `contract_compat.py` on every PR.
 - **Cost model:** Free minutes for public repos; per-minute for private beyond the allowance.
 - **Watch out:** Use OIDC, never stored client secrets.
-- **Lessons:** Module 7 (planned)
+- **Lessons:** [CI/CD, OIDC and IaC](docs/mlops/07-cicd-and-iac.md)
 - **Docs:** https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect
 
 ## Open formats and open-source

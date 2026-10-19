@@ -1,0 +1,43 @@
+# Continuous integration for the Azure Data Science Academy.
+# Runs on every pull request and on pushes to main. No Azure credentials needed:
+# the course code and content checks are all local. This is the first CI job
+# described in Module 7 (docs/mlops/07-cicd-and-iac.md).
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  python:
+    name: tests + content checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install course code dependencies
+        run: pip install -r code/requirements.txt
+      - name: Unit tests
+        run: cd code && python -m pytest
+      - name: Content checks (frontmatter, ids, links, checklists)
+        run: python3 scripts/check_content.py
+      - name: Data product registry + contracts
+        run: cd code && python data_mesh/registry.py validate
+
+  dashboard:
+    name: dashboard tests + build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dashboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm test
+      - run: npm run build

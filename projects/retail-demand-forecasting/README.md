@@ -51,7 +51,7 @@ flowchart LR
 | 3. Data products and governance | Sales and forecasting data products, contracts, ownership, freshness, registry, breaking-change gate; Azure mapping (Purview, Unity Catalog, Fabric) | **Implemented locally and tested** (registry + contracts); Azure catalog steps are documented procedures | [`code/data_mesh/`](../../code/data_mesh/), [`code/contracts/`](../../code/contracts/), [lesson](../../docs/data-mesh/01-data-mesh.md) |
 | 4. Azure ML | Tracked training, registered versions, reusable pipeline, automated evaluation and promotion | Planned (Module 5) | [roadmap](../../docs/azure-machine-learning/README.md) |
 | 5. Production inference | Scheduled batch forecasts, optional online endpoint/FastAPI, input/output validation, failure tracking | **Implemented and tested** locally (scoring → `gold/demand_forecast` contract-validated + FastAPI service); Azure endpoints documented | [`code/forecasting/score.py`](../../code/forecasting/score.py), [`code/forecast_service/`](../../code/forecast_service/), [Lab 06](../../labs/lab-06-model-deployment/README.md) |
-| 6. Operations | Schedules, DQ/drift/accuracy monitoring, retraining rules, alerts, CI/CD, cost estimate | Planned (Module 7) | [roadmap](../../docs/mlops/README.md) |
+| 6. Operations | Schedules, DQ/drift/accuracy monitoring, retraining rules, alerts, CI/CD, cost estimate | **Implemented and tested** locally (drift + accuracy monitor, retrain decision, CI workflow); Azure schedules/monitoring documented | [`code/forecasting/monitor.py`](../../code/forecasting/monitor.py), [MLOps lessons](../../docs/mlops/README.md) |
 
 ## Run what exists today
 

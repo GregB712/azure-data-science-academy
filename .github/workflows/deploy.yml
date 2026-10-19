@@ -1,0 +1,63 @@
+# Deploy infrastructure and the training schedule to Azure using OIDC (no secrets).
+# Illustrative: it runs only when the repo variables/secrets below are configured
+# and a federated credential is set up on an Entra app or user-assigned identity
+# (see docs/mlops/07-cicd-and-iac.md). client-id/tenant-id/subscription-id are
+# identifiers, not credentials; there is NO stored client secret.
+name: deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["infra/**", "code/forecasting/**", ".github/workflows/deploy.yml"]
+
+permissions:
+  id-token: write        # request the GitHub OIDC token (does NOT grant write to resources)
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production        # add protection rules to this environment
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login (OIDC, no secret)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: What-if the infrastructure change
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            az deployment group what-if \
+              --resource-group "$RG" --template-file infra/ml-platform.bicep \
+              --parameters workspaceName="$WS"
+        env:
+          RG: ${{ vars.AZURE_RESOURCE_GROUP }}
+          WS: ${{ vars.AML_WORKSPACE }}
+
+      - name: Deploy infrastructure
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            az deployment group create \
+              --resource-group "$RG" --template-file infra/ml-platform.bicep \
+              --parameters workspaceName="$WS"
+        env:
+          RG: ${{ vars.AZURE_RESOURCE_GROUP }}
+          WS: ${{ vars.AML_WORKSPACE }}
+
+      - name: Register training components and (re)create the weekly schedule
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            az extension add -n ml -y
+            az ml schedule create -f labs/lab-06-model-deployment/aml/score-job.yml \
+              --resource-group "$RG" --workspace-name "$WS" || true
+        env:
+          RG: ${{ vars.AZURE_RESOURCE_GROUP }}
+          WS: ${{ vars.AML_WORKSPACE }}

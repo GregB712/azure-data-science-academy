@@ -97,6 +97,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Pattern
 - Machine-readable agreement between a data producer and consumers: schema, semantics, quality guarantees, SLAs, ownership, classification, version. See [Data mesh](docs/data-mesh/01-data-mesh.md#33-data-contracts).
 
+### Data drift / prediction drift
+- **Kind:** Concept
+- **Data drift** is a shift in the model's input distribution versus a reference (training) set; **prediction drift** is a shift in the output distribution. Both are measured without ground truth (e.g. Jensen-Shannon distance, PSI). See [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md).
+
 ### Data lake
 - **Kind:** Pattern
 - Storage of data in files in object storage with schema-on-read. On Azure usually implemented with ADLS Gen2 or OneLake.
@@ -249,6 +253,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Concept
 - Physically grouping data files by column values (e.g. year) so queries can skip irrelevant files.
 
+### Population Stability Index (PSI)
+- **Kind:** Concept
+- A binned distribution-shift metric comparing a current sample to a reference. Rule of thumb: < 0.1 no shift, 0.1-0.25 moderate, > 0.25 significant drift. Used for feature drift in [`monitor.py`](code/forecasting/monitor.py). See [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md).
+
 ### Private endpoint
 - **Kind:** Azure capability
 - Private IP in your VNet for a PaaS resource, via Azure Private Link.
@@ -272,6 +280,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Resource provider
 - **Kind:** Azure capability
 - Service namespace (e.g. `Microsoft.Storage`) that must be registered in a subscription before use.
+
+### Retraining trigger
+- **Kind:** Concept
+- A rule that starts a new training run: a schedule, a drift breach, or realized-accuracy decay. Encoding it as code (not a blind cron) makes "why did it retrain?" answerable. See [Retraining and lineage](docs/mlops/09-retraining-and-lineage.md).
 
 ### Schema enforcement / schema evolution
 - **Kind:** Concept

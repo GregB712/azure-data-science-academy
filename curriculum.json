@@ -104,7 +104,7 @@
       "title": "MLOps and Production Operations",
       "description": "Training pipelines, GitHub Actions with OIDC, Bicep/Terraform, testing, drift, monitoring, alerting, retraining and lineage.",
       "estimatedHours": 10,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/mlops",
       "labs": []
     },
