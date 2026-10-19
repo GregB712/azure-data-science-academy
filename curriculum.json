@@ -92,7 +92,7 @@
       "title": "Model Management and Deployment",
       "description": "Model registry and versioning, managed online endpoints, batch endpoints, FastAPI integration, auth, scaling and release criteria.",
       "estimatedHours": 6,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/azure-machine-learning",
       "labs": [
         "lab-06-model-deployment"

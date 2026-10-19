@@ -25,7 +25,7 @@ flowchart LR
   M2 --> M4["M4 Pipelines 📝"]
   M3b --> M4
   M4 --> M5["M5 Azure ML ✅"]
-  M5 --> M6["M6 Deployment 📝"]
+  M5 --> M6["M6 Deployment ✅"]
   M6 --> M7["M7 MLOps 📝"]
   M1 --> M8["M8 GenAI 📝"]
   M7 --> M9["M9 Enterprise 📝"]
@@ -45,7 +45,7 @@ Module 3 comes before Module 2 in this first version on purpose: it is the archi
 | 3 | Data Lakes, Lakehouses and Data Mesh | ✅ | 12 | [Lakehouse + medallion](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md) · [Data mesh](docs/data-mesh/01-data-mesh.md) · [Lab 03](labs/lab-03-lakehouse/README.md) | None required (local); optional ADLS Gen2, Databricks or Fabric trial |
 | 4 | Data Pipelines and Scalable Processing | 📝 | 8 | [Roadmap](docs/storage-and-data-engineering/README.md#module-4-data-pipelines-and-scalable-processing-planned) · Lab 04 planned | ADF runs, Databricks job compute |
 | 5 | Azure Machine Learning Fundamentals | ✅ | 8 | [Workspace & compute](docs/azure-machine-learning/01-workspace-compute-and-costs.md) · [Jobs & tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md) · [Sweeps & pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md) · [Lab 05](labs/lab-05-model-training/README.md) | Serverless compute, Container Registry (local baseline is free) |
-| 6 | Model Management and Deployment | 📝 | 6 | [Roadmap](docs/azure-machine-learning/README.md#module-6-lessons-planned) · Lab 06 planned | **Online endpoints bill while deployed** |
+| 6 | Model Management and Deployment | ✅ | 6 | [Model registry](docs/azure-machine-learning/04-model-registry-and-release.md) · [Batch endpoints](docs/azure-machine-learning/05-batch-endpoints.md) · [Online + FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md) · [Lab 06](labs/lab-06-model-deployment/README.md) | **Online endpoints bill while deployed**; batch/Container Apps scale to zero |
 | 7 | MLOps and Production Operations | 📝 | 10 | [Roadmap](docs/mlops/README.md) | Log Analytics ingestion, scheduled compute |
 | 8 | Azure AI and Generative AI | 📝 | 10 | [Roadmap](docs/generative-ai/README.md) | **AI Search bills hourly**, tokens |
 | 9 | Enterprise Architecture, Security and Governance | 📝 | 8 | [Roadmap](docs/security-and-costs/README.md) | Private endpoints, Purview |

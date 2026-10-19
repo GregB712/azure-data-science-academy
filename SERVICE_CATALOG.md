@@ -288,7 +288,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Forecast API reading precomputed forecasts; RAG chat backend.
 - **Cost model:** Consumption: per vCPU-second and GiB-second plus requests, with a monthly free grant; dedicated workload profiles billed per node.
 - **Watch out:** Min replicas > 0 means continuous billing; cold starts with scale to zero.
-- **Lessons:** Module 6 and 8 (planned)
+- **Lessons:** [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md), [Lab 06](labs/lab-06-model-deployment/README.md); Module 8 (planned)
 - **Docs:** https://learn.microsoft.com/azure/container-apps/overview
 
 ### Azure Container Registry
@@ -380,3 +380,14 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Watch out:** Squared-error objectives chase a few high-volume series; Tweedie/MAE objectives fit demand better. MASE < 1 means it beats the naive baseline.
 - **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md)
 - **Docs:** https://lightgbm.readthedocs.io/en/latest/
+
+### FastAPI
+- **Category:** Open formats & OSS
+- **Kind:** Open source
+- **What it is:** Python web framework for building APIs, with Pydantic request/response validation and ASGI serving (uvicorn).
+- **Role in the architecture:** Hosts the demand forecast *product API* - precomputed lookups plus on-demand what-if scoring - on Azure Container Apps.
+- **Typical DS/AI uses:** Serving precomputed forecasts; recomputing a series with a planned promotion; RAG/AI backends (Module 8).
+- **Cost model:** Free; you pay for the Container Apps compute that runs it (scale-to-zero).
+- **Watch out:** Reach data by managed identity, not keys; validate inputs with Pydantic; mind cold starts at min-replicas 0.
+- **Lessons:** [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md), [Lab 06](labs/lab-06-model-deployment/README.md)
+- **Docs:** https://fastapi.tiangolo.com/

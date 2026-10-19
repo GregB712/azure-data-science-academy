@@ -281,7 +281,7 @@ flowchart LR
   subgraph SC["Supply chain domain"]
     cat["Product catalog<br/>source-aligned · published"]
     feat["Weekly demand features<br/>consumer-aligned · published"]
-    fc["Demand forecast<br/>consumer-aligned · planned"]
+    fc["Demand forecast<br/>consumer-aligned · published"]
   end
   subgraph FIN["Finance domain"]
     rec["Revenue reconciliation<br/>aggregate · planned"]
@@ -312,7 +312,7 @@ This diagram is generated from the domains' product descriptors by `python data_
 | `sales.daily-sales-summary` | Sales | Aggregate | sales-data-owner | Delta `gold/daily_sales_store_category` | *missing* | Sales BI |
 | `supply-chain.product-catalog` | Supply chain | Source-aligned | merchandising-owner | Delta `silver/products` | *missing* | Sales, Supply chain |
 | `supply-chain.demand-features` | Supply chain | Consumer-aligned | forecasting-owner | Delta `gold/weekly_demand_features` | [v1](../../code/contracts/forecasting.demand_features.v1.yaml) | Forecast training (Module 5) |
-| `supply-chain.demand-forecast` | Supply chain | Consumer-aligned | forecasting-owner | Delta `gold/demand_forecast` | planned | Replenishment |
+| `supply-chain.demand-forecast` | Supply chain | Consumer-aligned | forecasting-owner | Delta `gold/demand_forecast` | [v1](../../code/contracts/forecasting.demand_forecast.v1.yaml) | Replenishment |
 | `finance.revenue-reconciliation` | Finance | Aggregate | finance-data-owner | Delta `gold/revenue_reconciliation` | planned | Controlling |
 | `customer.loyalty-segments` | Customer analytics | Consumer-aligned | customer-insights-owner | Delta `gold/loyalty_segments` | planned | Marketing |
 
@@ -543,7 +543,7 @@ Changing sales.pos-transactions affects 4 product(s):
   - finance.revenue-reconciliation  (owner: finance-data-owner@contoso.example, status: planned)
   - sales.daily-sales-summary  (owner: sales-data-owner@contoso.example, status: published)
   - supply-chain.demand-features  (owner: forecasting-owner@contoso.example, status: published)
-  - supply-chain.demand-forecast  (owner: forecasting-owner@contoso.example, status: planned)
+  - supply-chain.demand-forecast  (owner: forecasting-owner@contoso.example, status: published)
 ```
 
 `contract_compat.py` on the proposal:

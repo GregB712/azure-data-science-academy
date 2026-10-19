@@ -13,13 +13,19 @@ summary: Planned lessons and labs for training, tracking, registering and deploy
 
 # Modules 5-6 Roadmap: Azure Machine Learning and Model Deployment
 
-**Module 5 is built; Module 6 is planned.** Module 5's lessons and lab are written and verified (links below); this page remains the design for Module 6 so you can see where the curriculum goes and extend it consistently.
+**Modules 5 and 6 are built.** Their lessons and labs are written and verified (links below); the tables further down record the original design.
 
 **Module 5 (available):**
 - [5.1-5.2 Workspace, compute and costs](01-workspace-compute-and-costs.md)
 - [5.3-5.6 Jobs, data and experiment tracking](02-jobs-data-and-tracking.md)
 - [5.7-5.8 Sweeps, components and pipelines](03-sweeps-components-and-pipelines.md)
 - [Lab 05: Train and backtest the demand model](../../labs/lab-05-model-training/README.md)
+
+**Module 6 (available):**
+- [6.1/6.5 Model registry, versioning and release criteria](04-model-registry-and-release.md)
+- [6.2 Batch endpoints and the forecast data product](05-batch-endpoints.md)
+- [6.3/6.4 Online endpoints and a FastAPI service](06-online-endpoints-and-fastapi.md)
+- [Lab 06: Register, score and serve the forecaster](../../labs/lab-06-model-deployment/README.md)
 
 ## Starting point you already have
 
@@ -41,7 +47,7 @@ summary: Planned lessons and labs for training, tracking, registering and deploy
 
 **Lab 05 (built): model training.** Local baseline first (LightGBM with temporal backtesting on the Gold table, metrics WAPE/MASE/bias), then the same script as an Azure ML command job on serverless compute, tracked with MLflow, followed by a 3-step validate-train-evaluate pipeline. Local alternative: run MLflow locally with `mlflow ui`. See [Lab 05](../../labs/lab-05-model-training/README.md).
 
-## Module 6 lessons (planned)
+## Module 6 lessons (built - see links above)
 
 | # | Lesson | Key content | Official docs |
 |---|---|---|---|
@@ -51,7 +57,7 @@ summary: Planned lessons and labs for training, tracking, registering and deploy
 | 6.4 | FastAPI forecast service | FastAPI on Azure Container Apps serving precomputed forecasts + on-demand scoring; managed identity | [Container Apps](https://learn.microsoft.com/azure/container-apps/overview) |
 | 6.5 | Release criteria | Backtest gates, champion/challenger, input/output validation with the data contract | — |
 
-**Lab 06 (planned): deployment.** Batch endpoint producing `gold/demand_forecast` (the planned `supply-chain.demand-forecast` data product), optional online endpoint, then delete endpoints.
+**Lab 06 (built): deployment.** Gate + register the model, produce `gold/demand_forecast` (the now-published `supply-chain.demand-forecast` data product), run the FastAPI service locally, then optionally deploy batch/online endpoints and Container Apps and delete the billable ones. See [Lab 06](../../labs/lab-06-model-deployment/README.md).
 
 ## Cost warnings to carry into these modules
 

@@ -50,7 +50,7 @@ flowchart LR
 | 2. Azure data platform | Bronze/Silver/Gold on Delta, quality checks, quarantine, idempotent MERGE; same code targets ADLS Gen2 | **Implemented locally and tested**; ADLS Gen2 path written but not run in the build environment | [`code/lakehouse_local/`](../../code/lakehouse_local/), [lesson](../../docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md) |
 | 3. Data products and governance | Sales and forecasting data products, contracts, ownership, freshness, registry, breaking-change gate; Azure mapping (Purview, Unity Catalog, Fabric) | **Implemented locally and tested** (registry + contracts); Azure catalog steps are documented procedures | [`code/data_mesh/`](../../code/data_mesh/), [`code/contracts/`](../../code/contracts/), [lesson](../../docs/data-mesh/01-data-mesh.md) |
 | 4. Azure ML | Tracked training, registered versions, reusable pipeline, automated evaluation and promotion | Planned (Module 5) | [roadmap](../../docs/azure-machine-learning/README.md) |
-| 5. Production inference | Scheduled batch forecasts, optional online endpoint/FastAPI, input/output validation, failure tracking | Planned (Module 6) | [roadmap](../../docs/azure-machine-learning/README.md) |
+| 5. Production inference | Scheduled batch forecasts, optional online endpoint/FastAPI, input/output validation, failure tracking | **Implemented and tested** locally (scoring → `gold/demand_forecast` contract-validated + FastAPI service); Azure endpoints documented | [`code/forecasting/score.py`](../../code/forecasting/score.py), [`code/forecast_service/`](../../code/forecast_service/), [Lab 06](../../labs/lab-06-model-deployment/README.md) |
 | 6. Operations | Schedules, DQ/drift/accuracy monitoring, retraining rules, alerts, CI/CD, cost estimate | Planned (Module 7) | [roadmap](../../docs/mlops/README.md) |
 
 ## Run what exists today
@@ -65,6 +65,8 @@ python lakehouse_local/medallion.py all --raw ../data/raw --lake ../data/lake
 python data_mesh/registry.py validate
 python -m forecasting.validate --data ../data/lake/gold/weekly_demand_features
 python -m forecasting.train    --data ../data/lake/gold/weekly_demand_features --output ../data/model
+python -m forecasting.score    --data ../data/lake/gold/weekly_demand_features \
+  --model ../data/model/model/model.txt --output ../data/lake/gold/demand_forecast
 python -m pytest
 ```
 

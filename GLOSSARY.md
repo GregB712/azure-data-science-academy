@@ -49,6 +49,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure service (tooling)
 - Declarative IaC language for Azure; compiles to ARM templates.
 
+### Blue/green deployment
+- **Kind:** Concept
+- Releasing a new model/version to a second deployment ("green") behind the same endpoint and shifting traffic from the old one ("blue") gradually, so rollback is instant. In Azure ML, traffic is set after both deployments exist. See [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md).
+
 ### Bronze / Silver / Gold
 - **Kind:** Pattern
 - Layers of the medallion architecture: raw replayable data, validated and conformed data, consumption-ready products. See [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md#37-the-medallion-architecture).
@@ -60,6 +64,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### CDC (change data capture)
 - **Kind:** Concept
 - Capturing inserts, updates and deletes from a source database as a stream of changes, enabling incremental ingestion.
+
+### Champion / challenger
+- **Kind:** Concept
+- A deployment pattern: the **champion** serves production while a **challenger** is compared against it. In Azure ML this is a tag-and-version convention (tag a version `stage=champion`, deploy that version); in Databricks Unity Catalog / open-source MLflow it uses registered-model aliases. See [Model registry and release](docs/azure-machine-learning/04-model-registry-and-release.md).
 
 ### Change data feed (Delta)
 - **Kind:** Open source
@@ -216,6 +224,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### MLflow
 - **Kind:** Open source
 - ML lifecycle tooling (tracking, models, registry) supported by Azure ML, Databricks and Fabric.
+
+### Model registry
+- **Kind:** Azure capability
+- The versioned store of trained models in an Azure ML workspace, with lineage back to the producing job, tags and MLflow packaging for no-code deployment. Reference a version (`name:7`) or the `@latest` label. See [Model registry and release](docs/azure-machine-learning/04-model-registry-and-release.md).
 
 ### OneLake
 - **Kind:** Azure service

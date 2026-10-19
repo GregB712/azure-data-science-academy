@@ -39,6 +39,13 @@ Two ways to track progress:
 - [ ] Ran the local backtest (WAPE ~0.23, MASE < 1) and compared runs in `mlflow ui`
 - [ ] Completed [Lab 05](labs/lab-05-model-training/README.md) (tasks 1-4 local; 5-7 optional on Azure)
 
+## Module 6: Model management and deployment
+- [ ] Read [Model registry and release](docs/azure-machine-learning/04-model-registry-and-release.md)
+- [ ] Read [Batch endpoints and the forecast product](docs/azure-machine-learning/05-batch-endpoints.md)
+- [ ] Read [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md)
+- [ ] Produced `gold/demand_forecast` and ran the FastAPI service locally
+- [ ] Completed [Lab 06](labs/lab-06-model-deployment/README.md) (tasks 1-4 local; 5-8 optional; billable endpoints deleted)
+
 ## Reference work
 - [ ] Wrote my first ADR using the [decision guide](ARCHITECTURE_DECISION_GUIDE.md) template
 
@@ -47,6 +54,7 @@ Two ways to track progress:
 - [ ] Stage 2 lakehouse running locally
 - [ ] Stage 2 lakehouse running on ADLS Gen2
 - [ ] Stage 3 contracts for all published products
+- [ ] Stage 5 forecast product `gold/demand_forecast` produced and served (Module 6)
 
 ## Notes
 <!-- Dates, blockers, questions, links to your own repos -->

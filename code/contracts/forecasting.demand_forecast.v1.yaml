@@ -1,0 +1,44 @@
+# Data contract for the supply-chain Demand Forecast product (Gold).
+# Produced by the scoring job (Module 6) from the registered model and the
+# weekly_demand_features table; consumed by replenishment and planners.
+# Simplified ODCS v3 structure; see sales.pos_sales.v1.yaml for notes.
+apiVersion: v3.0.2
+kind: DataContract
+id: 2c7f4e13-forecasting-demand-forecast
+name: demand_forecast
+version: 1.0.0
+status: active
+domain: supply-chain
+dataProduct: demand-forecast
+description:
+  purpose: Weekly one-step-ahead product-store demand forecasts for replenishment.
+  usage: Replenishment planning and planner review; aggregable to category/region/chain.
+  limitations: >-
+    One week ahead per series. Forecasts are non-negative expected demand, not
+    censored by future stock. Promotions/holidays beyond the scored week are
+    assumed absent unless supplied by a plan. Missing series (no history) are omitted.
+team:
+  - username: forecasting-owner@contoso.example
+    role: Data Product Owner
+schema:
+  - name: demand_forecast
+    physicalName: gold/demand_forecast
+    physicalType: delta_table
+    quality:
+      - rule: unique
+        columns: [week_start, store_id, product_id]
+      - rule: rowCount
+        mustBeGreaterThan: 0
+    properties:
+      - {name: week_start, logicalType: date, required: true, primaryKey: true}
+      - {name: store_id, logicalType: string, required: true, primaryKey: true}
+      - {name: product_id, logicalType: string, required: true, primaryKey: true}
+      - name: forecast_units
+        logicalType: number
+        required: true
+        quality: [{rule: range, mustBeGreaterThanOrEqualTo: 0}]
+      - {name: model_version, logicalType: string, required: true}
+      - {name: scored_at, logicalType: string, required: true}
+slaProperties:
+  - {property: frequency, value: 1, unit: w}
+  - {property: latency, value: 168, unit: h}
