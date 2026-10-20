@@ -17,3 +17,4 @@ azure-identity>=1.23
 azure-mgmt-resource>=24.0
 azure-mgmt-resource-subscriptions>=1.0
 azure-storage-file-datalake>=12.20
+adlfs>=2024.7            # fsspec filesystem for ADLS Gen2 (pandas/pyarrow over abfss://)

@@ -22,6 +22,13 @@ Two ways to track progress:
 - [ ] Completed the independent exercise (team subscription/RG/RBAC design)
 - [ ] Completed [Lab 01](labs/lab-01-azure-setup/README.md) (or tasks 1-3 + offline verification)
 
+## Module 2: Cloud storage and data access
+- [ ] Read [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md)
+- [ ] Read [Python data access](docs/storage-and-data-engineering/02-python-data-access.md)
+- [ ] Read [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md)
+- [ ] Converted data to Parquet and compared layouts (sizing, pruning, projection)
+- [ ] Completed [Lab 02](labs/lab-02-cloud-storage/README.md) (tasks 1-3 local; 4-5 optional on Azure)
+
 ## Module 3: Lakehouse and data mesh
 - [ ] Read [Lakehouse + medallion](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
 - [ ] Ran the local medallion pipeline and the tests

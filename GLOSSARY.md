@@ -25,6 +25,18 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - An Azure resource holding a managed identity that Unity Catalog uses to access ADLS Gen2 on behalf of Databricks, without keys.
 
+### Access tier (Blob)
+- **Kind:** Azure capability
+- The storage tier of a blob - hot, cool, cold or archive - trading storage price against read price and minimum retention. Lifecycle policies move data between tiers by age. See [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md).
+
+### ACL (ADLS Gen2)
+- **Kind:** Azure capability
+- POSIX-style access control list on a directory/file (r/w/x for owning user, named users, groups, other). Evaluated only when Azure RBAC did not already grant the operation; needs `x` on every parent to traverse. See [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md).
+
+### Auto-pause (serverless)
+- **Kind:** Azure capability
+- Azure SQL Database serverless pauses compute after an idle delay (default 60 min, minimum 15, `-1` disables), billing only storage until a query resumes it (a few seconds' latency). See [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md).
+
 ### Availability zone
 - **Kind:** Azure capability
 - Physically separate datacenter groups within a region; zone-redundant services survive a zone outage.

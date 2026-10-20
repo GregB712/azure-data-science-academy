@@ -93,7 +93,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Azure ML default datastore, document corpora for RAG.
 - **Cost model:** GB-month by tier and redundancy + per-operation transactions + egress.
 - **Watch out:** Disable shared-key and public access; cooler tiers charge more for reads and have minimum retention.
-- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), Module 2 (planned)
+- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md)
 - **Docs:** https://learn.microsoft.com/azure/storage/blobs/storage-blobs-introduction
 
 ### Azure Data Lake Storage Gen2
@@ -104,7 +104,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Bronze/Silver/Gold Delta tables; training data; batch forecast outputs.
 - **Cost model:** Blob pricing for the HNS account type (capacity + transactions, with some HNS-specific metadata/operation charges).
 - **Watch out:** HNS must be chosen at creation (or via an upgrade process); ACLs and RBAC interact (RBAC evaluated first).
-- **Lessons:** [Lab 01](labs/lab-01-azure-setup/README.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
+- **Lessons:** [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md), [Python data access](docs/storage-and-data-engineering/02-python-data-access.md), [Lab 01](labs/lab-01-azure-setup/README.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
 - **Docs:** https://learn.microsoft.com/azure/storage/blobs/data-lake-storage-introduction
 
 ### OneLake
@@ -126,7 +126,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Storing forecast overrides from planners; feature lookups for small online services.
 - **Cost model:** vCore or DTU per hour (serverless bills per second of use with auto-pause) + storage.
 - **Watch out:** Use Entra authentication; serverless auto-pause has resume latency.
-- **Lessons:** Module 2 (planned)
+- **Lessons:** [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md), [Lab 02](labs/lab-02-cloud-storage/README.md)
 - **Docs:** https://learn.microsoft.com/azure/azure-sql/database/sql-database-paas-overview
 
 ## Data integration and streaming

@@ -44,7 +44,7 @@
       "title": "Cloud Storage and Data Access",
       "description": "Blob Storage vs ADLS Gen2, hierarchical namespace, ACLs, reading and writing Parquet with pandas/PyArrow/adlfs, Azure SQL Database and access patterns.",
       "estimatedHours": 6,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/storage-and-data-engineering",
       "labs": [
         "lab-02-cloud-storage"

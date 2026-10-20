@@ -13,9 +13,15 @@ summary: Planned lessons for storage access patterns from Python and SQL (Module
 
 # Modules 2 and 4 Roadmap: Cloud Storage, Data Access and Pipelines
 
-**Status: planned.** Module 3's lakehouse lesson already contains the core medallion pipeline; these modules widen the storage and orchestration skills around it.
+**Module 2 is built; Module 4 is planned.** Module 3's lakehouse lesson already contains the core medallion pipeline; these modules widen the storage and orchestration skills around it.
 
-## Module 2: Cloud Storage and Data Access (planned)
+**Module 2 (available):**
+- [2.1-2.2 Blob vs ADLS Gen2, and the RBAC + ACL model](01-storage-and-access-control.md)
+- [2.3-2.4 Reading and writing data from Python (adlfs, PyArrow, Parquet)](02-python-data-access.md)
+- [2.5 Azure SQL Database for reference/operational data](03-azure-sql.md)
+- [Lab 02: Cloud storage and data access](../../labs/lab-02-cloud-storage/README.md)
+
+## Module 2: Cloud Storage and Data Access (built - see links above)
 
 | # | Lesson | Key content | Official docs |
 |---|---|---|---|
@@ -25,7 +31,7 @@ summary: Planned lessons for storage access patterns from Python and SQL (Module
 | 2.4 | File formats and layout | CSV vs JSON vs Parquet, compression, partitioned datasets, file sizing | [Best practices](https://learn.microsoft.com/azure/storage/blobs/data-lake-storage-best-practices) |
 | 2.5 | Azure SQL Database | Serverless tier, Entra authentication from Python (`pyodbc`/`mssql-python`), when to use it | [Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/sql-database-paas-overview) |
 
-**Lab 02 (planned):** upload the synthetic retail raw files to `bronze`, read Parquet/Delta with pandas through `adlfs` using `DefaultAzureCredential`, compare partitioned layouts, and load reference data into a serverless Azure SQL Database with auto-pause.
+**Lab 02 (built):** convert the synthetic retail data to Parquet and compare partitioned layouts locally, then optionally upload to `bronze`, read it through `adlfs` with `DefaultAzureCredential`, and load reference data into a serverless Azure SQL Database with auto-pause. See [Lab 02](../../labs/lab-02-cloud-storage/README.md).
 
 ## Module 4: Data Pipelines and Scalable Processing (planned)
 
