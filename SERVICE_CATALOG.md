@@ -139,7 +139,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Nightly POS extract copy; triggering a scoring pipeline after Gold refresh.
 - **Cost model:** Per activity run, per data integration unit-hour for copies, per vCore-hour for data flows.
 - **Watch out:** Data flows spin up Spark clusters (cost and startup time); keep heavy logic in Spark/SQL engines.
-- **Lessons:** Module 4 (planned)
+- **Lessons:** [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md), [Lab 04](labs/lab-04-data-pipelines/README.md)
 - **Docs:** https://learn.microsoft.com/azure/data-factory/introduction
 
 ### Fabric Data Factory
@@ -150,7 +150,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Loading Bronze tables in a Fabric Lakehouse; scheduling notebooks.
 - **Cost model:** Consumes Fabric capacity units.
 - **Watch out:** Not identical to Azure Data Factory feature-for-feature; check connector and feature availability.
-- **Lessons:** Module 4 (planned)
+- **Lessons:** [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md), [Lab 04](labs/lab-04-data-pipelines/README.md)
 - **Docs:** https://learn.microsoft.com/fabric/data-factory/data-factory-overview
 
 ### Azure Event Hubs
@@ -161,7 +161,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Real-time sales events for intraday demand sensing.
 - **Cost model:** Throughput/processing units or capacity units per hour + ingress events.
 - **Watch out:** Provisioned throughput bills while idle.
-- **Lessons:** Module 4 (planned)
+- **Lessons:** [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md), [Lab 04](labs/lab-04-data-pipelines/README.md)
 - **Docs:** https://learn.microsoft.com/azure/event-hubs/event-hubs-about
 
 ## Analytics platforms

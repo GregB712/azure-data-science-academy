@@ -39,6 +39,13 @@ Two ways to track progress:
 - [ ] Data mesh exercises 1-5
 - [ ] Completed [Lab 03](labs/lab-03-lakehouse/README.md)
 
+## Module 4: Data pipelines and scalable processing
+- [ ] Read [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md)
+- [ ] Read [Spark and Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md)
+- [ ] Read [Incremental, CDC and testing](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md)
+- [ ] Ran incremental Silver (idempotent), read a change data feed, applied an SCD2 update
+- [ ] Completed [Lab 04](labs/lab-04-data-pipelines/README.md) (tasks 1-4 local; task 5 optional on Azure)
+
 ## Module 5: Azure Machine Learning
 - [ ] Read [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md)
 - [ ] Read [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md)

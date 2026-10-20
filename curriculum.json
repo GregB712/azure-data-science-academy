@@ -68,7 +68,7 @@
       "title": "Data Pipelines and Scalable Processing",
       "description": "Azure Data Factory and Fabric Data Factory, Databricks Jobs, PySpark, incremental ingestion and CDC, data validation and pipeline testing.",
       "estimatedHours": 8,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/storage-and-data-engineering",
       "labs": [
         "lab-04-data-pipelines"

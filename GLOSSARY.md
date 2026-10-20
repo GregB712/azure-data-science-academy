@@ -33,6 +33,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - POSIX-style access control list on a directory/file (r/w/x for owning user, named users, groups, other). Evaluated only when Azure RBAC did not already grant the operation; needs `x` on every parent to traverse. See [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md).
 
+### Auto Loader (cloudFiles)
+- **Kind:** Azure capability
+- Databricks' incremental file ingestion: it tracks which files it has seen and processes each new one once (process-once), underpinning micro-batch ingestion. See [Spark and Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md).
+
 ### Auto-pause (serverless)
 - **Kind:** Azure capability
 - Azure SQL Database serverless pauses compute after an idle delay (default 60 min, minimum 15, `-1` disables), billing only storage until a query resumes it (a few seconds' latency). See [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md).
@@ -169,6 +173,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Concept
 - Extract-transform-load (transform before loading the target) vs extract-load-transform (land raw, transform inside the platform). Lakehouses favour ELT.
 
+### ELT / ETL
+- **Kind:** Pattern
+- Extract-Load-Transform lands raw data first and transforms inside the lake/warehouse (the lakehouse default); Extract-Transform-Load transforms before loading. See [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md).
+
 ### Endpoint (managed online)
 - **Kind:** Azure capability
 - Azure ML managed HTTPS endpoint hosting one or more deployments with autoscaling and traffic splitting; bills per instance while deployed.
@@ -212,6 +220,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Key Vault
 - **Kind:** Azure service
 - Managed secrets, keys and certificates store.
+
+### Lakeflow Declarative Pipelines
+- **Kind:** Azure capability
+- Databricks' declarative ETL framework (formerly Delta Live Tables; now Spark Declarative Pipelines in Apache Spark): declare tables as transformations with data-quality **expectations**, and the runtime handles orchestration and incrementalisation. Existing DLT code runs unchanged. See [Spark and Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md).
 
 ### Landing zone
 - **Kind:** Pattern
@@ -297,6 +309,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Concept
 - A rule that starts a new training run: a schedule, a drift breach, or realized-accuracy decay. Encoding it as code (not a blind cron) makes "why did it retrain?" answerable. See [Retraining and lineage](docs/mlops/09-retraining-and-lineage.md).
 
+### SCD type 2 (slowly changing dimension)
+- **Kind:** Pattern
+- Keeping dimension history by versioning rows: when an attribute changes, close the current row (`effective_to`, `is_current=False`) and open a new current one. Type 1 overwrites instead. See [Incremental, CDC and testing](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md).
+
 ### Schema enforcement / schema evolution
 - **Kind:** Concept
 - Rejecting writes that don't match a table's schema / explicitly allowing compatible schema changes (e.g. adding columns).
@@ -344,6 +360,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### VACUUM
 - **Kind:** Open source
 - Delta operation that deletes data files no longer referenced by versions within the retention period.
+
+### Watermark (high-watermark)
+- **Kind:** Concept
+- The highest value already processed (e.g. max ingestion time) stored between runs, so an incremental step processes only newer rows. Combined with an upsert MERGE it makes the step idempotent. Captures appends/updates but not deletes (use CDC for those). See [Incremental, CDC and testing](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md).
 
 ### Workload identity federation
 - **Kind:** Azure capability
