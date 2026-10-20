@@ -264,7 +264,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** RAG over product documentation; an agent that explains forecasts to planners.
 - **Cost model:** Mostly per token (standard deployments) or provisioned throughput units; tools and search billed separately.
 - **Watch out:** Model and feature availability varies by region and deployment type; names changed recently (Azure AI services are now "Foundry Tools"), so match docs to the portal you use (Foundry vs Foundry classic).
-- **Lessons:** Module 8 (planned), [roadmap](docs/generative-ai/README.md)
+- **Lessons:** [Foundry models and inference](docs/generative-ai/01-foundry-models-and-inference.md), [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md)
 - **Docs:** https://learn.microsoft.com/azure/ai-foundry/what-is-azure-ai-foundry
 
 ### Azure AI Search
@@ -275,7 +275,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Indexing chunked documents with embeddings; hybrid search with filters.
 - **Cost model:** Per search unit-hour by tier (always on); semantic ranker and AI enrichment billed additionally.
 - **Watch out:** Even an idle service bills hourly; the Free tier is limited and not for production.
-- **Lessons:** Module 8 (planned)
+- **Lessons:** [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md)
 - **Docs:** https://learn.microsoft.com/azure/search/search-what-is-azure-search
 
 ## Application hosting and operations

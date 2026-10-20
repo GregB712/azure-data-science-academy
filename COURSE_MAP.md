@@ -27,7 +27,7 @@ flowchart LR
   M4 --> M5["M5 Azure ML ✅"]
   M5 --> M6["M6 Deployment ✅"]
   M6 --> M7["M7 MLOps ✅"]
-  M1 --> M8["M8 GenAI 📝"]
+  M1 --> M8["M8 GenAI ✅"]
   M7 --> M9["M9 Enterprise 📝"]
   M3b --> M9
   M7 --> M10["M10 Capstone 🟡"]
@@ -47,7 +47,7 @@ Module 3 comes before Module 2 in this first version on purpose: it is the archi
 | 5 | Azure Machine Learning Fundamentals | ✅ | 8 | [Workspace & compute](docs/azure-machine-learning/01-workspace-compute-and-costs.md) · [Jobs & tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md) · [Sweeps & pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md) · [Lab 05](labs/lab-05-model-training/README.md) | Serverless compute, Container Registry (local baseline is free) |
 | 6 | Model Management and Deployment | ✅ | 6 | [Model registry](docs/azure-machine-learning/04-model-registry-and-release.md) · [Batch endpoints](docs/azure-machine-learning/05-batch-endpoints.md) · [Online + FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md) · [Lab 06](labs/lab-06-model-deployment/README.md) | **Online endpoints bill while deployed**; batch/Container Apps scale to zero |
 | 7 | MLOps and Production Operations | ✅ | 10 | [CI/CD + IaC](docs/mlops/07-cicd-and-iac.md) · [Pipelines + monitoring](docs/mlops/08-pipelines-and-monitoring.md) · [Retraining + lineage](docs/mlops/09-retraining-and-lineage.md) | Log Analytics ingestion, scheduled/serverless compute (scale-to-zero) |
-| 8 | Azure AI and Generative AI | 📝 | 10 | [Roadmap](docs/generative-ai/README.md) | **AI Search bills hourly**, tokens |
+| 8 | Azure AI and Generative AI | ✅ | 10 | [Foundry & models](docs/generative-ai/01-foundry-models-and-inference.md) · [RAG & AI Search](docs/generative-ai/02-rag-and-ai-search.md) · [Agents, eval & cost](docs/generative-ai/03-agents-evaluation-and-cost.md) | **AI Search bills hourly**, tokens (local RAG core is free) |
 | 9 | Enterprise Architecture, Security and Governance | 📝 | 8 | [Roadmap](docs/security-and-costs/README.md) | Private endpoints, Purview |
 | 10 | End-to-End Capstone | 🟡 | 20 | [Capstone](projects/retail-demand-forecasting/README.md) · Lab 07 planned | All of the above, briefly |
 

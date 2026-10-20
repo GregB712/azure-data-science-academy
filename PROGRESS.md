@@ -67,6 +67,12 @@ Two ways to track progress:
 - [ ] Ran the drift/accuracy monitor and the retrain decision locally
 - [ ] Ran the repo's CI checks locally (pytest + check_content + registry validate + dashboard)
 
+## Module 8: Azure AI and generative AI
+- [ ] Read [Foundry models and inference](docs/generative-ai/01-foundry-models-and-inference.md)
+- [ ] Read [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md)
+- [ ] Read [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md)
+- [ ] Ran the local RAG core (chunk, embed, retrieve, grounded prompt) and retrieval evaluation
+
 ## Reference work
 - [ ] Wrote my first ADR using the [decision guide](ARCHITECTURE_DECISION_GUIDE.md) template
 

@@ -89,6 +89,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Open source
 - Optional Delta Lake feature recording row-level changes per table version, for incremental downstream processing.
 
+### Chunking
+- **Kind:** Concept
+- Splitting documents into overlapping passages before embedding, so retrieval returns specific, self-contained context. Too large dilutes relevance; too small loses context. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
+
 ### Command job (Azure ML)
 - **Kind:** Azure capability
 - An Azure ML job that runs one command on a compute target with a code snapshot, a pinned environment and typed inputs/outputs. Omitting the compute target runs it on serverless compute. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
@@ -177,6 +181,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Pattern
 - Extract-Load-Transform lands raw data first and transforms inside the lake/warehouse (the lakehouse default); Extract-Transform-Load transforms before loading. See [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md).
 
+### Embedding
+- **Kind:** Concept
+- A vector representation of text where similar meaning is nearby, produced by an embedding model (e.g. text-embedding-3-large). The basis of vector search and RAG; use one model consistently per index. See [Foundry models and inference](docs/generative-ai/01-foundry-models-and-inference.md).
+
 ### Endpoint (managed online)
 - **Kind:** Azure capability
 - Azure ML managed HTTPS endpoint hosting one or more deployments with autoscaling and traffic splitting; bills per instance while deployed.
@@ -205,9 +213,17 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - Purview Unified Catalog boundary that aligns governance (glossary, data products, policies) with the organisation.
 
+### Groundedness
+- **Kind:** Concept
+- Whether a generated answer is supported by the retrieved context (not invented). A core RAG evaluation metric (azure-ai-evaluation), enforced in prompts by "answer only from the context". See [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md).
+
 ### Hierarchical namespace (HNS)
 - **Kind:** Azure capability
 - Storage account option that turns Blob Storage into ADLS Gen2 with real directories and ACLs.
+
+### Hybrid search
+- **Kind:** Concept
+- Combining keyword (BM25) and vector search in one query, usually with better recall than either alone; often followed by semantic re-ranking. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
 
 ### Idempotency
 - **Kind:** Concept
@@ -285,6 +301,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - Private IP in your VNet for a PaaS resource, via Azure Private Link.
 
+### Prompt injection
+- **Kind:** Concept
+- An attack where user input or retrieved text carries instructions that hijack the model ("ignore previous instructions"). Defend by keeping the system prompt authoritative, treating context as data, least-privilege tools, and Prompt Shields. See [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md).
+
 ### Purview Unified Catalog
 - **Kind:** Azure capability
 - Microsoft Purview's catalog experience with governance domains, data products, glossary terms, data quality, OKRs and access requests.
@@ -320,6 +340,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Schema-on-read / schema-on-write
 - **Kind:** Concept
 - Applying structure when querying (lakes) vs when loading (warehouses).
+
+### Semantic ranking
+- **Kind:** Azure capability
+- An Azure AI Search feature that re-ranks the top results with a language model and can return captions/answers; billed additionally. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
 
 ### Separation of storage and compute
 - **Kind:** Pattern
@@ -360,6 +384,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### VACUUM
 - **Kind:** Open source
 - Delta operation that deletes data files no longer referenced by versions within the retention period.
+
+### Vector search
+- **Kind:** Concept
+- Retrieving by nearest-neighbour similarity of embeddings rather than keyword match; in Azure AI Search via a vector field and a VectorizedQuery/VectorizableTextQuery. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
 
 ### Watermark (high-watermark)
 - **Kind:** Concept

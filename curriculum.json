@@ -114,7 +114,7 @@
       "title": "Azure AI and Generative AI",
       "description": "Microsoft Foundry (formerly Azure AI Foundry), model deployments, embeddings, Azure AI Search, RAG ingestion, FastAPI AI services, agents, evaluation and cost.",
       "estimatedHours": 10,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/generative-ai",
       "labs": []
     },
