@@ -7,6 +7,10 @@ build/
 .next/
 *.tsbuildinfo
 
+# Generated course data, lakehouse tables, trained models and MLflow runs
+data/
+mlruns/
+
 # Python
 __pycache__/
 *.py[cod]

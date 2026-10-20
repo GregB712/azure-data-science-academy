@@ -58,7 +58,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** API keys for external data providers; Databricks secret scopes backed by Key Vault.
 - **Cost model:** Per operation (and per key for HSM-backed keys); very cheap at lab scale.
 - **Watch out:** Soft-deleted vaults keep the name reserved; purge if you need to reuse it. Prefer RBAC permission model.
-- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md)
+- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Networking and secrets](docs/security-and-costs/02-networking-and-secrets.md)
 - **Docs:** https://learn.microsoft.com/azure/key-vault/general/overview
 
 ### Azure Policy
@@ -69,7 +69,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Enforcing that every ML workspace has public network access disabled in prod.
 - **Cost model:** Free for Azure resources.
 - **Watch out:** Enterprise policies can block lab commands; read the error's policy name.
-- **Lessons:** Module 9 (planned)
+- **Lessons:** [Landing zones and policy as code](docs/security-and-costs/01-landing-zones-and-policy.md)
 - **Docs:** https://learn.microsoft.com/azure/governance/policy/overview
 
 ### Microsoft Cost Management
@@ -80,7 +80,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Budget alerts on lab RGs; cost per data product via tags.
 - **Cost model:** Free for Azure usage.
 - **Watch out:** Budgets alert but never stop spending; cost data lags 8–24 hours.
-- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Lab 01](labs/lab-01-azure-setup/README.md)
+- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md), [Lab 01](labs/lab-01-azure-setup/README.md)
 - **Docs:** https://learn.microsoft.com/azure/cost-management-billing/costs/overview-cost-management
 
 ## Storage
@@ -93,7 +93,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Azure ML default datastore, document corpora for RAG.
 - **Cost model:** GB-month by tier and redundancy + per-operation transactions + egress.
 - **Watch out:** Disable shared-key and public access; cooler tiers charge more for reads and have minimum retention.
-- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), Module 2 (planned)
+- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md)
 - **Docs:** https://learn.microsoft.com/azure/storage/blobs/storage-blobs-introduction
 
 ### Azure Data Lake Storage Gen2
@@ -104,7 +104,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Bronze/Silver/Gold Delta tables; training data; batch forecast outputs.
 - **Cost model:** Blob pricing for the HNS account type (capacity + transactions, with some HNS-specific metadata/operation charges).
 - **Watch out:** HNS must be chosen at creation (or via an upgrade process); ACLs and RBAC interact (RBAC evaluated first).
-- **Lessons:** [Lab 01](labs/lab-01-azure-setup/README.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
+- **Lessons:** [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md), [Python data access](docs/storage-and-data-engineering/02-python-data-access.md), [Lab 01](labs/lab-01-azure-setup/README.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
 - **Docs:** https://learn.microsoft.com/azure/storage/blobs/data-lake-storage-introduction
 
 ### OneLake
@@ -126,7 +126,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Storing forecast overrides from planners; feature lookups for small online services.
 - **Cost model:** vCore or DTU per hour (serverless bills per second of use with auto-pause) + storage.
 - **Watch out:** Use Entra authentication; serverless auto-pause has resume latency.
-- **Lessons:** Module 2 (planned)
+- **Lessons:** [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md), [Lab 02](labs/lab-02-cloud-storage/README.md)
 - **Docs:** https://learn.microsoft.com/azure/azure-sql/database/sql-database-paas-overview
 
 ## Data integration and streaming
@@ -139,7 +139,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Nightly POS extract copy; triggering a scoring pipeline after Gold refresh.
 - **Cost model:** Per activity run, per data integration unit-hour for copies, per vCore-hour for data flows.
 - **Watch out:** Data flows spin up Spark clusters (cost and startup time); keep heavy logic in Spark/SQL engines.
-- **Lessons:** Module 4 (planned)
+- **Lessons:** [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md), [Lab 04](labs/lab-04-data-pipelines/README.md)
 - **Docs:** https://learn.microsoft.com/azure/data-factory/introduction
 
 ### Fabric Data Factory
@@ -150,7 +150,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Loading Bronze tables in a Fabric Lakehouse; scheduling notebooks.
 - **Cost model:** Consumes Fabric capacity units.
 - **Watch out:** Not identical to Azure Data Factory feature-for-feature; check connector and feature availability.
-- **Lessons:** Module 4 (planned)
+- **Lessons:** [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md), [Lab 04](labs/lab-04-data-pipelines/README.md)
 - **Docs:** https://learn.microsoft.com/fabric/data-factory/data-factory-overview
 
 ### Azure Event Hubs
@@ -161,7 +161,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Real-time sales events for intraday demand sensing.
 - **Cost model:** Throughput/processing units or capacity units per hour + ingress events.
 - **Watch out:** Provisioned throughput bills while idle.
-- **Lessons:** Module 4 (planned)
+- **Lessons:** [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md), [Lab 04](labs/lab-04-data-pipelines/README.md)
 - **Docs:** https://learn.microsoft.com/azure/event-hubs/event-hubs-about
 
 ## Analytics platforms
@@ -240,7 +240,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Finding trusted training data; requesting access to a data product; classification of PII.
 - **Cost model:** Varies by capability (data map, data quality, scanning); check current Purview pricing and licensing.
 - **Watch out:** Catalog quality depends on curation; automate product registration from code.
-- **Lessons:** [Data mesh](docs/data-mesh/01-data-mesh.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
+- **Lessons:** [Data mesh](docs/data-mesh/01-data-mesh.md), [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
 - **Docs:** https://learn.microsoft.com/purview/unified-catalog
 
 ## Machine learning and AI
@@ -253,7 +253,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** LightGBM forecasting training pipeline, hyperparameter sweeps, weekly batch forecasts.
 - **Cost model:** The workspace is free; you pay for compute (per VM-hour), associated storage, container registry, Key Vault and Application Insights; endpoints bill per instance while deployed.
 - **Watch out:** Compute instances run until stopped (use idle shutdown); low default GPU quota.
-- **Lessons:** Modules 5–7 (planned), [roadmap](docs/azure-machine-learning/README.md)
+- **Lessons:** [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md), [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md), [Lab 05](labs/lab-05-model-training/README.md); Modules 6–7 (planned)
 - **Docs:** https://learn.microsoft.com/azure/machine-learning/overview-what-is-azure-machine-learning
 
 ### Microsoft Foundry
@@ -264,7 +264,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** RAG over product documentation; an agent that explains forecasts to planners.
 - **Cost model:** Mostly per token (standard deployments) or provisioned throughput units; tools and search billed separately.
 - **Watch out:** Model and feature availability varies by region and deployment type; names changed recently (Azure AI services are now "Foundry Tools"), so match docs to the portal you use (Foundry vs Foundry classic).
-- **Lessons:** Module 8 (planned), [roadmap](docs/generative-ai/README.md)
+- **Lessons:** [Foundry models and inference](docs/generative-ai/01-foundry-models-and-inference.md), [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md)
 - **Docs:** https://learn.microsoft.com/azure/ai-foundry/what-is-azure-ai-foundry
 
 ### Azure AI Search
@@ -275,7 +275,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Indexing chunked documents with embeddings; hybrid search with filters.
 - **Cost model:** Per search unit-hour by tier (always on); semantic ranker and AI enrichment billed additionally.
 - **Watch out:** Even an idle service bills hourly; the Free tier is limited and not for production.
-- **Lessons:** Module 8 (planned)
+- **Lessons:** [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md)
 - **Docs:** https://learn.microsoft.com/azure/search/search-what-is-azure-search
 
 ## Application hosting and operations
@@ -288,7 +288,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Forecast API reading precomputed forecasts; RAG chat backend.
 - **Cost model:** Consumption: per vCPU-second and GiB-second plus requests, with a monthly free grant; dedicated workload profiles billed per node.
 - **Watch out:** Min replicas > 0 means continuous billing; cold starts with scale to zero.
-- **Lessons:** Module 6 and 8 (planned)
+- **Lessons:** [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md), [Lab 06](labs/lab-06-model-deployment/README.md); Module 8 (planned)
 - **Docs:** https://learn.microsoft.com/azure/container-apps/overview
 
 ### Azure Container Registry
@@ -299,7 +299,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Custom training and inference images.
 - **Cost model:** Per day by tier (Basic/Standard/Premium) + storage.
 - **Watch out:** Azure ML creates one per workspace on first image build; it keeps billing after experiments end.
-- **Lessons:** Module 5–6 (planned)
+- **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md); Module 6 (planned)
 - **Docs:** https://learn.microsoft.com/azure/container-registry/container-registry-intro
 
 ### Azure Monitor and Application Insights
@@ -310,7 +310,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Tracing a FastAPI forecasting service; alerting when a batch job fails.
 - **Cost model:** Mostly per GB ingested and retained in Log Analytics.
 - **Watch out:** Verbose logging can cost more than the service you monitor; set sampling and retention.
-- **Lessons:** Module 7 (planned)
+- **Lessons:** [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md)
 - **Docs:** https://learn.microsoft.com/azure/azure-monitor/overview
 
 ### Bicep
@@ -321,7 +321,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Lab 01's storage account and role assignment; per-domain platform modules.
 - **Cost model:** Free.
 - **Watch out:** Role assignment names must be deterministic GUIDs (`guid()`), or redeployments fail.
-- **Lessons:** [Lab 01](labs/lab-01-azure-setup/README.md), Module 7 (planned)
+- **Lessons:** [Lab 01](labs/lab-01-azure-setup/README.md), [CI/CD, OIDC and IaC](docs/mlops/07-cicd-and-iac.md)
 - **Docs:** https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview
 
 ### GitHub Actions
@@ -332,7 +332,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Running `pytest` and `contract_compat.py` on every PR.
 - **Cost model:** Free minutes for public repos; per-minute for private beyond the allowance.
 - **Watch out:** Use OIDC, never stored client secrets.
-- **Lessons:** Module 7 (planned)
+- **Lessons:** [CI/CD, OIDC and IaC](docs/mlops/07-cicd-and-iac.md)
 - **Docs:** https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect
 
 ## Open formats and open-source
@@ -367,5 +367,27 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Logging forecasting metrics and models; comparing runs.
 - **Cost model:** Free; the backing workspace bills.
 - **Watch out:** Feature parity differs between hosted MLflow implementations.
-- **Lessons:** Module 5 (planned)
+- **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md)
 - **Docs:** https://learn.microsoft.com/azure/machine-learning/concept-mlflow
+
+### LightGBM
+- **Category:** Open formats & OSS
+- **Kind:** Open source (integrated with Azure)
+- **What it is:** Gradient-boosting framework for tabular data, with native categorical handling and objectives (including Tweedie/Poisson) suited to retail demand counts.
+- **Role in the architecture:** The course's demand forecasting model, trained locally and as an Azure ML job on the Gold feature table.
+- **Typical DS/AI uses:** Weekly product-store demand forecasting; hyperparameter sweeps over learning rate and tree size.
+- **Cost model:** Free; runs on CPU (no GPU required for the course).
+- **Watch out:** Squared-error objectives chase a few high-volume series; Tweedie/MAE objectives fit demand better. MASE < 1 means it beats the naive baseline.
+- **Lessons:** [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md), [Lab 05](labs/lab-05-model-training/README.md)
+- **Docs:** https://lightgbm.readthedocs.io/en/latest/
+
+### FastAPI
+- **Category:** Open formats & OSS
+- **Kind:** Open source
+- **What it is:** Python web framework for building APIs, with Pydantic request/response validation and ASGI serving (uvicorn).
+- **Role in the architecture:** Hosts the demand forecast *product API* - precomputed lookups plus on-demand what-if scoring - on Azure Container Apps.
+- **Typical DS/AI uses:** Serving precomputed forecasts; recomputing a series with a planned promotion; RAG/AI backends (Module 8).
+- **Cost model:** Free; you pay for the Container Apps compute that runs it (scale-to-zero).
+- **Watch out:** Reach data by managed identity, not keys; validate inputs with Pydantic; mind cold starts at min-replicas 0.
+- **Lessons:** [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md), [Lab 06](labs/lab-06-model-deployment/README.md)
+- **Docs:** https://fastapi.tiangolo.com/

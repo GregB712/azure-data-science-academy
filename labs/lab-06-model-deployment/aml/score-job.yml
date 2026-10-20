@@ -1,0 +1,38 @@
+# Weekly scoring as an Azure ML command job (CLI v2), on a scale-to-zero cluster.
+# This is the primary way the course produces the gold/demand_forecast product:
+# the forecast needs each series' full history, so a command/pipeline job (not a
+# per-row batch endpoint) is the right fit. Module 7 puts this on a schedule.
+#   az ml job create -f score-job.yml --web
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+display_name: demand-forecast-score
+experiment_name: retail-demand-forecasting
+
+code: ../../../code
+command: >-
+  python -m forecasting.score
+  --data ${{inputs.gold}}
+  --model ${{inputs.model}}
+  --output ${{outputs.forecast}}
+  --model-version ${{inputs.model_version}}
+
+inputs:
+  gold:
+    type: uri_folder
+    path: azureml:weekly_demand_features@latest
+  model:
+    # The registered model, mounted read-only. @latest is the supported label;
+    # in production pin the champion's explicit version (e.g. demand-forecaster:7).
+    type: mlflow_model
+    path: azureml:demand-forecaster@latest
+  model_version: "latest"
+
+outputs:
+  forecast:
+    type: uri_folder
+    # Bind to the lake so the Delta product lands at gold/demand_forecast.
+    path: azureml://datastores/lakehouse/paths/retail/gold/demand_forecast
+    mode: rw_mount
+
+environment: azureml:demand-forecast-env@latest
+compute: azureml:cpu-cluster        # min_instances=0; bills only while scoring

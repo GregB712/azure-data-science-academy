@@ -13,7 +13,14 @@ summary: Planned lessons for production GenAI on Azure with Microsoft Foundry (f
 
 # Module 8 Roadmap: Azure AI and Generative AI
 
-**Status: planned.**
+**Module 8 is built.** Its lessons are written and verified (links below); the terminology table and design further down record the current naming and the original plan.
+
+**Module 8 (available):**
+- [8.1-8.2 Foundry resource model, deployments and inference](01-foundry-models-and-inference.md)
+- [8.3-8.4 Embeddings, Azure AI Search and RAG ingestion](02-rag-and-ai-search.md)
+- [8.5-8.8 AI services, agents, evaluation and cost](03-agents-evaluation-and-cost.md)
+
+The runnable, offline RAG core (chunk, embed, retrieve, ground, evaluate) is [`code/genai/`](../../code/genai/); Azure-side steps (Foundry deployments, AI Search, agents) are documented and verified against Microsoft Learn but not run against a subscription. Module 8 has no separate lab.
 
 ## Terminology check (verified October 2026)
 
@@ -40,7 +47,7 @@ flowchart LR
   api --> obs["Tracing + evaluation<br/>(Foundry, App Insights)"]
 ```
 
-## Planned lessons
+## Lessons (built - see links above)
 
 | # | Lesson | Key content |
 |---|---|---|

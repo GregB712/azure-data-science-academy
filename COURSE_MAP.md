@@ -21,16 +21,16 @@ flowchart LR
   L1 --> M3["M3 Lakehouse + medallion ✅"]
   M3 --> M3b["M3 Data mesh ✅"]
   M3b --> L3["Lab 03 lakehouse ✅"]
-  L1 --> M2["M2 Storage & access 📝"]
-  M2 --> M4["M4 Pipelines 📝"]
+  L1 --> M2["M2 Storage & access ✅"]
+  M2 --> M4["M4 Pipelines ✅"]
   M3b --> M4
-  M4 --> M5["M5 Azure ML 📝"]
-  M5 --> M6["M6 Deployment 📝"]
-  M6 --> M7["M7 MLOps 📝"]
-  M1 --> M8["M8 GenAI 📝"]
-  M7 --> M9["M9 Enterprise 📝"]
+  M4 --> M5["M5 Azure ML ✅"]
+  M5 --> M6["M6 Deployment ✅"]
+  M6 --> M7["M7 MLOps ✅"]
+  M1 --> M8["M8 GenAI ✅"]
+  M7 --> M9["M9 Enterprise ✅"]
   M3b --> M9
-  M7 --> M10["M10 Capstone 🟡"]
+  M7 --> M10["M10 Capstone ✅"]
   M8 -.-> M10
 ```
 
@@ -41,15 +41,15 @@ Module 3 comes before Module 2 in this first version on purpose: it is the archi
 | # | Module | Status | Est. hours | Lessons and labs | Billable Azure resources |
 |---|---|---|---|---|---|
 | 1 | Azure Fundamentals for Data Scientists | ✅ | 6 | [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md) · [Lab 01](labs/lab-01-azure-setup/README.md) | Storage account (near zero) |
-| 2 | Cloud Storage and Data Access | 📝 | 6 | [Roadmap](docs/storage-and-data-engineering/README.md) · Lab 02 planned | Storage, serverless Azure SQL (auto-pause) |
+| 2 | Cloud Storage and Data Access | ✅ | 6 | [Storage & access](docs/storage-and-data-engineering/01-storage-and-access-control.md) · [Python access](docs/storage-and-data-engineering/02-python-data-access.md) · [Azure SQL](docs/storage-and-data-engineering/03-azure-sql.md) · [Lab 02](labs/lab-02-cloud-storage/README.md) | Storage (cents), serverless Azure SQL (auto-pause) |
 | 3 | Data Lakes, Lakehouses and Data Mesh | ✅ | 12 | [Lakehouse + medallion](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md) · [Data mesh](docs/data-mesh/01-data-mesh.md) · [Lab 03](labs/lab-03-lakehouse/README.md) | None required (local); optional ADLS Gen2, Databricks or Fabric trial |
-| 4 | Data Pipelines and Scalable Processing | 📝 | 8 | [Roadmap](docs/storage-and-data-engineering/README.md#module-4-data-pipelines-and-scalable-processing-planned) · Lab 04 planned | ADF runs, Databricks job compute |
-| 5 | Azure Machine Learning Fundamentals | 📝 | 8 | [Roadmap](docs/azure-machine-learning/README.md) · Lab 05 planned | Compute instance/cluster, Container Registry |
-| 6 | Model Management and Deployment | 📝 | 6 | [Roadmap](docs/azure-machine-learning/README.md#module-6-lessons-planned) · Lab 06 planned | **Online endpoints bill while deployed** |
-| 7 | MLOps and Production Operations | 📝 | 10 | [Roadmap](docs/mlops/README.md) | Log Analytics ingestion, scheduled compute |
-| 8 | Azure AI and Generative AI | 📝 | 10 | [Roadmap](docs/generative-ai/README.md) | **AI Search bills hourly**, tokens |
-| 9 | Enterprise Architecture, Security and Governance | 📝 | 8 | [Roadmap](docs/security-and-costs/README.md) | Private endpoints, Purview |
-| 10 | End-to-End Capstone | 🟡 | 20 | [Capstone](projects/retail-demand-forecasting/README.md) · Lab 07 planned | All of the above, briefly |
+| 4 | Data Pipelines and Scalable Processing | ✅ | 8 | [ETL/ELT & orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md) · [Spark & Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md) · [Incremental & CDC](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md) · [Lab 04](labs/lab-04-data-pipelines/README.md) | ADF runs or Databricks job compute (local core is free) |
+| 5 | Azure Machine Learning Fundamentals | ✅ | 8 | [Workspace & compute](docs/azure-machine-learning/01-workspace-compute-and-costs.md) · [Jobs & tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md) · [Sweeps & pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md) · [Lab 05](labs/lab-05-model-training/README.md) | Serverless compute, Container Registry (local baseline is free) |
+| 6 | Model Management and Deployment | ✅ | 6 | [Model registry](docs/azure-machine-learning/04-model-registry-and-release.md) · [Batch endpoints](docs/azure-machine-learning/05-batch-endpoints.md) · [Online + FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md) · [Lab 06](labs/lab-06-model-deployment/README.md) | **Online endpoints bill while deployed**; batch/Container Apps scale to zero |
+| 7 | MLOps and Production Operations | ✅ | 10 | [CI/CD + IaC](docs/mlops/07-cicd-and-iac.md) · [Pipelines + monitoring](docs/mlops/08-pipelines-and-monitoring.md) · [Retraining + lineage](docs/mlops/09-retraining-and-lineage.md) | Log Analytics ingestion, scheduled/serverless compute (scale-to-zero) |
+| 8 | Azure AI and Generative AI | ✅ | 10 | [Foundry & models](docs/generative-ai/01-foundry-models-and-inference.md) · [RAG & AI Search](docs/generative-ai/02-rag-and-ai-search.md) · [Agents, eval & cost](docs/generative-ai/03-agents-evaluation-and-cost.md) | **AI Search bills hourly**, tokens (local RAG core is free) |
+| 9 | Enterprise Architecture, Security and Governance | ✅ | 8 | [Landing zones & policy](docs/security-and-costs/01-landing-zones-and-policy.md) · [Networking & secrets](docs/security-and-costs/02-networking-and-secrets.md) · [Governance, RAI & FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md) | Private endpoints, Purview (local governance/FinOps code is free) |
+| 10 | End-to-End Capstone | ✅ | 20 | [Capstone](projects/retail-demand-forecasting/README.md) · [Lab 07](labs/lab-07-end-to-end-capstone/README.md) | All of the above, briefly (local run is free) |
 
 ## Reference material (available)
 

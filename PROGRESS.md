@@ -22,6 +22,13 @@ Two ways to track progress:
 - [ ] Completed the independent exercise (team subscription/RG/RBAC design)
 - [ ] Completed [Lab 01](labs/lab-01-azure-setup/README.md) (or tasks 1-3 + offline verification)
 
+## Module 2: Cloud storage and data access
+- [ ] Read [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md)
+- [ ] Read [Python data access](docs/storage-and-data-engineering/02-python-data-access.md)
+- [ ] Read [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md)
+- [ ] Converted data to Parquet and compared layouts (sizing, pruning, projection)
+- [ ] Completed [Lab 02](labs/lab-02-cloud-storage/README.md) (tasks 1-3 local; 4-5 optional on Azure)
+
 ## Module 3: Lakehouse and data mesh
 - [ ] Read [Lakehouse + medallion](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
 - [ ] Ran the local medallion pipeline and the tests
@@ -32,6 +39,46 @@ Two ways to track progress:
 - [ ] Data mesh exercises 1-5
 - [ ] Completed [Lab 03](labs/lab-03-lakehouse/README.md)
 
+## Module 4: Data pipelines and scalable processing
+- [ ] Read [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md)
+- [ ] Read [Spark and Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md)
+- [ ] Read [Incremental, CDC and testing](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md)
+- [ ] Ran incremental Silver (idempotent), read a change data feed, applied an SCD2 update
+- [ ] Completed [Lab 04](labs/lab-04-data-pipelines/README.md) (tasks 1-4 local; task 5 optional on Azure)
+
+## Module 5: Azure Machine Learning
+- [ ] Read [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md)
+- [ ] Read [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md)
+- [ ] Read [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md)
+- [ ] Ran the local backtest (WAPE ~0.23, MASE < 1) and compared runs in `mlflow ui`
+- [ ] Completed [Lab 05](labs/lab-05-model-training/README.md) (tasks 1-4 local; 5-7 optional on Azure)
+
+## Module 6: Model management and deployment
+- [ ] Read [Model registry and release](docs/azure-machine-learning/04-model-registry-and-release.md)
+- [ ] Read [Batch endpoints and the forecast product](docs/azure-machine-learning/05-batch-endpoints.md)
+- [ ] Read [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md)
+- [ ] Produced `gold/demand_forecast` and ran the FastAPI service locally
+- [ ] Completed [Lab 06](labs/lab-06-model-deployment/README.md) (tasks 1-4 local; 5-8 optional; billable endpoints deleted)
+
+## Module 7: MLOps and production operations
+- [ ] Read [CI/CD, OIDC and IaC](docs/mlops/07-cicd-and-iac.md)
+- [ ] Read [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md)
+- [ ] Read [Retraining and lineage](docs/mlops/09-retraining-and-lineage.md)
+- [ ] Ran the drift/accuracy monitor and the retrain decision locally
+- [ ] Ran the repo's CI checks locally (pytest + check_content + registry validate + dashboard)
+
+## Module 8: Azure AI and generative AI
+- [ ] Read [Foundry models and inference](docs/generative-ai/01-foundry-models-and-inference.md)
+- [ ] Read [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md)
+- [ ] Read [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md)
+- [ ] Ran the local RAG core (chunk, embed, retrieve, grounded prompt) and retrieval evaluation
+
+## Module 9: Enterprise architecture, security and governance
+- [ ] Read [Landing zones and policy](docs/security-and-costs/01-landing-zones-and-policy.md)
+- [ ] Read [Networking and secrets](docs/security-and-costs/02-networking-and-secrets.md)
+- [ ] Read [Governance, responsible AI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md)
+- [ ] Ran the tag checker and the monthly cost estimate (standing vs usage, by domain)
+
 ## Reference work
 - [ ] Wrote my first ADR using the [decision guide](ARCHITECTURE_DECISION_GUIDE.md) template
 
@@ -40,6 +87,11 @@ Two ways to track progress:
 - [ ] Stage 2 lakehouse running locally
 - [ ] Stage 2 lakehouse running on ADLS Gen2
 - [ ] Stage 3 contracts for all published products
+- [ ] Stage 4 model trained, backtested and gated (Module 5-6)
+- [ ] Stage 5 forecast product `gold/demand_forecast` produced and served (Module 6)
+- [ ] Stage 6 incremental, monitoring and cost estimate (Module 7, 9)
+- [ ] Completed [Lab 07: end-to-end capstone](labs/lab-07-end-to-end-capstone/README.md) (full local run + `pytest`)
+- [ ] Wrote the portfolio verified-vs-designed note
 
 ## Notes
 <!-- Dates, blockers, questions, links to your own repos -->

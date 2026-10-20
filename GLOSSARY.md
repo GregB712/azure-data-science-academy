@@ -25,6 +25,22 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - An Azure resource holding a managed identity that Unity Catalog uses to access ADLS Gen2 on behalf of Databricks, without keys.
 
+### Access tier (Blob)
+- **Kind:** Azure capability
+- The storage tier of a blob - hot, cool, cold or archive - trading storage price against read price and minimum retention. Lifecycle policies move data between tiers by age. See [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md).
+
+### ACL (ADLS Gen2)
+- **Kind:** Azure capability
+- POSIX-style access control list on a directory/file (r/w/x for owning user, named users, groups, other). Evaluated only when Azure RBAC did not already grant the operation; needs `x` on every parent to traverse. See [Storage and access control](docs/storage-and-data-engineering/01-storage-and-access-control.md).
+
+### Auto Loader (cloudFiles)
+- **Kind:** Azure capability
+- Databricks' incremental file ingestion: it tracks which files it has seen and processes each new one once (process-once), underpinning micro-batch ingestion. See [Spark and Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md).
+
+### Auto-pause (serverless)
+- **Kind:** Azure capability
+- Azure SQL Database serverless pauses compute after an idle delay (default 60 min, minimum 15, `-1` disables), billing only storage until a query resumes it (a few seconds' latency). See [Azure SQL Database](docs/storage-and-data-engineering/03-azure-sql.md).
+
 ### Availability zone
 - **Kind:** Azure capability
 - Physically separate datacenter groups within a region; zone-redundant services survive a zone outage.
@@ -33,9 +49,17 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure service (tooling)
 - Cross-platform command-line interface for Azure Resource Manager and many data planes. Install inside WSL. See [Lab 01](labs/lab-01-azure-setup/README.md).
 
+### Azure Policy
+- **Kind:** Azure service
+- Rule engine that evaluates resources and applies an effect (audit, deny, append/modify, deployIfNotExists) to enforce guardrails such as allowed regions, required tags and no public access. Controls configuration, not spend. See [Landing zones and policy](docs/security-and-costs/01-landing-zones-and-policy.md).
+
 ### Azure Resource Manager (ARM)
 - **Kind:** Azure service
 - The control-plane API (`management.azure.com`) behind the portal, CLI, SDKs, Bicep and Terraform.
+
+### Backtesting (rolling-origin)
+- **Kind:** Concept
+- Evaluating a forecaster on a time-ordered split where every test period is strictly later than the training data, with an expanding window - unlike random k-fold, which leaks the future. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
 
 ### Batch endpoint
 - **Kind:** Azure capability
@@ -44,6 +68,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Bicep
 - **Kind:** Azure service (tooling)
 - Declarative IaC language for Azure; compiles to ARM templates.
+
+### Blue/green deployment
+- **Kind:** Concept
+- Releasing a new model/version to a second deployment ("green") behind the same endpoint and shifting traffic from the old one ("blue") gradually, so rollback is instant. In Azure ML, traffic is set after both deployments exist. See [Online endpoints and FastAPI](docs/azure-machine-learning/06-online-endpoints-and-fastapi.md).
 
 ### Bronze / Silver / Gold
 - **Kind:** Pattern
@@ -57,17 +85,49 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Concept
 - Capturing inserts, updates and deletes from a source database as a stream of changes, enabling incremental ingestion.
 
+### Champion / challenger
+- **Kind:** Concept
+- A deployment pattern: the **champion** serves production while a **challenger** is compared against it. In Azure ML this is a tag-and-version convention (tag a version `stage=champion`, deploy that version); in Databricks Unity Catalog / open-source MLflow it uses registered-model aliases. See [Model registry and release](docs/azure-machine-learning/04-model-registry-and-release.md).
+
 ### Change data feed (Delta)
 - **Kind:** Open source
 - Optional Delta Lake feature recording row-level changes per table version, for incremental downstream processing.
+
+### Chunking
+- **Kind:** Concept
+- Splitting documents into overlapping passages before embedding, so retrieval returns specific, self-contained context. Too large dilutes relevance; too small loses context. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
+
+### Command job (Azure ML)
+- **Kind:** Azure capability
+- An Azure ML job that runs one command on a compute target with a code snapshot, a pinned environment and typed inputs/outputs. Omitting the compute target runs it on serverless compute. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
+
+### Component (Azure ML)
+- **Kind:** Azure capability
+- A self-contained, versioned pipeline step with typed inputs/outputs, authored in YAML or Python (`@command_component`) and reused across pipelines. See [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md).
+
+### Compute instance / cluster / serverless (Azure ML)
+- **Kind:** Azure capability
+- The three ways to get Azure ML compute: a single-user **compute instance** (bills until stopped; use idle shutdown), an autoscaling **compute cluster** (free at `min_instances=0`), and **serverless compute** (no cluster to manage; the default when a job omits its compute target). See [Workspace, compute and costs](docs/azure-machine-learning/01-workspace-compute-and-costs.md).
 
 ### Control plane / data plane
 - **Kind:** Concept
 - Control plane manages resources (ARM, roles like Owner/Contributor). Data plane accesses the contents (blobs, secrets, model inference; roles like Storage Blob Data Reader). See [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md#32-control-plane-vs-data-plane-the-single-most-important-idea).
 
+### Customer-managed key (CMK)
+- **Kind:** Azure capability
+- Encrypting a service's data with a key you own in Key Vault (vs Microsoft-managed keys), so you control the key lifecycle - used when compliance requires it. See [Networking and secrets](docs/security-and-costs/02-networking-and-secrets.md).
+
+### Data asset (Azure ML)
+- **Kind:** Azure capability
+- A versioned reference to data in Azure ML, of type `uri_file`, `uri_folder` or `mltable`. The course registers the Gold Delta table as a `uri_folder` and reads it with identity-based auth. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
+
 ### Data contract
 - **Kind:** Pattern
 - Machine-readable agreement between a data producer and consumers: schema, semantics, quality guarantees, SLAs, ownership, classification, version. See [Data mesh](docs/data-mesh/01-data-mesh.md#33-data-contracts).
+
+### Data drift / prediction drift
+- **Kind:** Concept
+- **Data drift** is a shift in the model's input distribution versus a reference (training) set; **prediction drift** is a shift in the output distribution. Both are measured without ground truth (e.g. Jensen-Shannon distance, PSI). See [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md).
 
 ### Data lake
 - **Kind:** Pattern
@@ -125,6 +185,14 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Concept
 - Extract-transform-load (transform before loading the target) vs extract-load-transform (land raw, transform inside the platform). Lakehouses favour ELT.
 
+### ELT / ETL
+- **Kind:** Pattern
+- Extract-Load-Transform lands raw data first and transforms inside the lake/warehouse (the lakehouse default); Extract-Transform-Load transforms before loading. See [ETL/ELT and orchestration](docs/storage-and-data-engineering/04-etl-elt-and-orchestration.md).
+
+### Embedding
+- **Kind:** Concept
+- A vector representation of text where similar meaning is nearby, produced by an embedding model (e.g. text-embedding-3-large). The basis of vector search and RAG; use one model consistently per index. See [Foundry models and inference](docs/generative-ai/01-foundry-models-and-inference.md).
+
 ### Endpoint (managed online)
 - **Kind:** Azure capability
 - Azure ML managed HTTPS endpoint hosting one or more deployments with autoscaling and traffic splitting; bills per instance while deployed.
@@ -133,9 +201,21 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure service
 - Microsoft's identity platform, formerly Azure Active Directory.
 
+### Environment (Azure ML)
+- **Kind:** Azure capability
+- A versioned definition of a job's runtime (base image + conda/pip packages). **Curated** environments are Microsoft-maintained (no build); **custom** ones build an image into the workspace Container Registry. See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
+
 ### Federated computational governance
 - **Kind:** Pattern
 - Data mesh principle: global policies agreed by domain and central representatives, enforced automatically by the platform.
+
+### FinOps
+- **Kind:** Concept
+- Operational practice of making cloud cost visible, allocated and managed: tag-based cost allocation by domain/owner, budgets and alerts, idle-resource detection, and reservations for steady baselines. See [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md).
+
+### Forecast accuracy (WAPE, MASE, bias)
+- **Kind:** Concept
+- **WAPE** = sum|y-yhat| / sum|y| (volume-weighted error, defined when actuals are zero). **MASE** = model MAE / in-sample naive MAE; < 1 beats the naive baseline. **Bias** = sum(yhat-y)/sum(y), signed (positive = over-forecast). See [Jobs, data and tracking](docs/azure-machine-learning/02-jobs-data-and-tracking.md).
 
 ### Foundry (Microsoft Foundry)
 - **Kind:** Azure service
@@ -145,9 +225,17 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - Purview Unified Catalog boundary that aligns governance (glossary, data products, policies) with the organisation.
 
+### Groundedness
+- **Kind:** Concept
+- Whether a generated answer is supported by the retrieved context (not invented). A core RAG evaluation metric (azure-ai-evaluation), enforced in prompts by "answer only from the context". See [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md).
+
 ### Hierarchical namespace (HNS)
 - **Kind:** Azure capability
 - Storage account option that turns Blob Storage into ADLS Gen2 with real directories and ACLs.
+
+### Hybrid search
+- **Kind:** Concept
+- Combining keyword (BM25) and vector search in one query, usually with better recall than either alone; often followed by semantic re-ranking. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
 
 ### Idempotency
 - **Kind:** Concept
@@ -160,6 +248,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Key Vault
 - **Kind:** Azure service
 - Managed secrets, keys and certificates store.
+
+### Lakeflow Declarative Pipelines
+- **Kind:** Azure capability
+- Databricks' declarative ETL framework (formerly Delta Live Tables; now Spark Declarative Pipelines in Apache Spark): declare tables as transformations with data-quality **expectations**, and the runtime handles orchestration and incrementalisation. Existing DLT code runs unchanged. See [Spark and Databricks](docs/storage-and-data-engineering/05-spark-and-databricks.md).
 
 ### Landing zone
 - **Kind:** Pattern
@@ -189,6 +281,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Open source
 - ML lifecycle tooling (tracking, models, registry) supported by Azure ML, Databricks and Fabric.
 
+### Model registry
+- **Kind:** Azure capability
+- The versioned store of trained models in an Azure ML workspace, with lineage back to the producing job, tags and MLflow packaging for no-code deployment. Reference a version (`name:7`) or the `@latest` label. See [Model registry and release](docs/azure-machine-learning/04-model-registry-and-release.md).
+
 ### OneLake
 - **Kind:** Azure service
 - Fabric's single tenant-wide data lake built on ADLS Gen2 technology.
@@ -209,9 +305,17 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Concept
 - Physically grouping data files by column values (e.g. year) so queries can skip irrelevant files.
 
+### Population Stability Index (PSI)
+- **Kind:** Concept
+- A binned distribution-shift metric comparing a current sample to a reference. Rule of thumb: < 0.1 no shift, 0.1-0.25 moderate, > 0.25 significant drift. Used for feature drift in [`monitor.py`](code/forecasting/monitor.py). See [Pipelines and monitoring](docs/mlops/08-pipelines-and-monitoring.md).
+
 ### Private endpoint
 - **Kind:** Azure capability
 - Private IP in your VNet for a PaaS resource, via Azure Private Link.
+
+### Prompt injection
+- **Kind:** Concept
+- An attack where user input or retrieved text carries instructions that hijack the model ("ignore previous instructions"). Defend by keeping the system prompt authoritative, treating context as data, least-privilege tools, and Prompt Shields. See [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md).
 
 ### Purview Unified Catalog
 - **Kind:** Azure capability
@@ -233,6 +337,18 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - Service namespace (e.g. `Microsoft.Storage`) that must be registered in a subscription before use.
 
+### Responsible AI dashboard
+- **Kind:** Azure capability
+- Azure ML tool combining error analysis (worst-performing cohorts), fairness (Fairlearn), interpretability (InterpretML) and a scorecard PDF, to debug and document a model before promotion. See [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md).
+
+### Retraining trigger
+- **Kind:** Concept
+- A rule that starts a new training run: a schedule, a drift breach, or realized-accuracy decay. Encoding it as code (not a blind cron) makes "why did it retrain?" answerable. See [Retraining and lineage](docs/mlops/09-retraining-and-lineage.md).
+
+### SCD type 2 (slowly changing dimension)
+- **Kind:** Pattern
+- Keeping dimension history by versioning rows: when an attribute changes, close the current row (`effective_to`, `is_current=False`) and open a new current one. Type 1 overwrites instead. See [Incremental, CDC and testing](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md).
+
 ### Schema enforcement / schema evolution
 - **Kind:** Concept
 - Rejecting writes that don't match a table's schema / explicitly allowing compatible schema changes (e.g. adding columns).
@@ -240,6 +356,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Schema-on-read / schema-on-write
 - **Kind:** Concept
 - Applying structure when querying (lakes) vs when loading (warehouses).
+
+### Semantic ranking
+- **Kind:** Azure capability
+- An Azure AI Search feature that re-ranks the top results with a language model and can return captions/answers; billed additionally. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
 
 ### Separation of storage and compute
 - **Kind:** Pattern
@@ -261,6 +381,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure capability
 - Billing, quota and access boundary containing resource groups.
 
+### Sweep (hyperparameter)
+- **Kind:** Azure capability
+- An Azure ML job that runs a command across a search space, optimising a primary metric logged to MLflow, with sampling (random/grid/bayesian) and early termination (e.g. `BanditPolicy`) to bound cost. See [Sweeps, components and pipelines](docs/azure-machine-learning/03-sweeps-components-and-pipelines.md).
+
 ### Tenant
 - **Kind:** Concept
 - A dedicated Microsoft Entra ID instance for an organisation. A Fabric tenant has exactly one OneLake.
@@ -276,6 +400,14 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### VACUUM
 - **Kind:** Open source
 - Delta operation that deletes data files no longer referenced by versions within the retention period.
+
+### Vector search
+- **Kind:** Concept
+- Retrieving by nearest-neighbour similarity of embeddings rather than keyword match; in Azure AI Search via a vector field and a VectorizedQuery/VectorizableTextQuery. See [RAG and Azure AI Search](docs/generative-ai/02-rag-and-ai-search.md).
+
+### Watermark (high-watermark)
+- **Kind:** Concept
+- The highest value already processed (e.g. max ingestion time) stored between runs, so an incremental step processes only newer rows. Combined with an upsert MERGE it makes the step idempotent. Captures appends/updates but not deletes (use CDC for those). See [Incremental, CDC and testing](docs/storage-and-data-engineering/06-incremental-cdc-and-testing.md).
 
 ### Workload identity federation
 - **Kind:** Azure capability

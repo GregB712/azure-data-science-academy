@@ -44,7 +44,7 @@
       "title": "Cloud Storage and Data Access",
       "description": "Blob Storage vs ADLS Gen2, hierarchical namespace, ACLs, reading and writing Parquet with pandas/PyArrow/adlfs, Azure SQL Database and access patterns.",
       "estimatedHours": 6,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/storage-and-data-engineering",
       "labs": [
         "lab-02-cloud-storage"
@@ -68,7 +68,7 @@
       "title": "Data Pipelines and Scalable Processing",
       "description": "Azure Data Factory and Fabric Data Factory, Databricks Jobs, PySpark, incremental ingestion and CDC, data validation and pipeline testing.",
       "estimatedHours": 8,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/storage-and-data-engineering",
       "labs": [
         "lab-04-data-pipelines"
@@ -80,7 +80,7 @@
       "title": "Azure Machine Learning Fundamentals",
       "description": "Workspaces, compute, environments, data assets, components, command jobs, MLflow tracking, sweeps and reproducibility.",
       "estimatedHours": 8,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/azure-machine-learning",
       "labs": [
         "lab-05-model-training"
@@ -92,7 +92,7 @@
       "title": "Model Management and Deployment",
       "description": "Model registry and versioning, managed online endpoints, batch endpoints, FastAPI integration, auth, scaling and release criteria.",
       "estimatedHours": 6,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/azure-machine-learning",
       "labs": [
         "lab-06-model-deployment"
@@ -104,7 +104,7 @@
       "title": "MLOps and Production Operations",
       "description": "Training pipelines, GitHub Actions with OIDC, Bicep/Terraform, testing, drift, monitoring, alerting, retraining and lineage.",
       "estimatedHours": 10,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/mlops",
       "labs": []
     },
@@ -114,7 +114,7 @@
       "title": "Azure AI and Generative AI",
       "description": "Microsoft Foundry (formerly Azure AI Foundry), model deployments, embeddings, Azure AI Search, RAG ingestion, FastAPI AI services, agents, evaluation and cost.",
       "estimatedHours": 10,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/generative-ai",
       "labs": []
     },
@@ -124,7 +124,7 @@
       "title": "Enterprise Architecture, Security and Governance",
       "description": "Landing zones, environment separation, private endpoints, Key Vault, Purview classification and lineage, responsible AI, tagging and cost allocation.",
       "estimatedHours": 8,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/security-and-costs",
       "labs": []
     },
@@ -134,7 +134,7 @@
       "title": "End-to-End Capstone: Retail Demand Forecasting",
       "description": "Local baseline, medallion lakehouse, governed data products, Azure ML training pipeline, batch and online inference, monitoring and cost optimisation.",
       "estimatedHours": 20,
-      "status": "planned",
+      "status": "available",
       "docsPath": "projects/retail-demand-forecasting",
       "labs": [
         "lab-07-end-to-end-capstone"

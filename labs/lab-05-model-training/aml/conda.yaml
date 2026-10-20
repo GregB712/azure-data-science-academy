@@ -1,0 +1,21 @@
+# Conda definition for the custom Azure ML environment used by the training job.
+# The curated AzureML environments do not ship delta-rs, so we build our own on
+# top of a Microsoft base image (see environment.yml). Versions mirror
+# code/requirements.txt; pin them for reproducibility and bump deliberately.
+# Verify current curated environments at https://ml.azure.com/registries/azureml/environments
+name: demand-forecast
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip>=24.0
+  - pip:
+      - numpy>=2.0
+      - pandas>=2.2
+      - pyarrow>=17
+      - deltalake>=1.0
+      - lightgbm>=4.0
+      - pyyaml>=6.0
+      - mlflow>=2.9
+      - azureml-mlflow>=1.57        # wires MLflow to the workspace tracking store inside jobs
+      - azure-identity>=1.23
