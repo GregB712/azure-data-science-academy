@@ -124,7 +124,7 @@
       "title": "Enterprise Architecture, Security and Governance",
       "description": "Landing zones, environment separation, private endpoints, Key Vault, Purview classification and lineage, responsible AI, tagging and cost allocation.",
       "estimatedHours": 8,
-      "status": "planned",
+      "status": "available",
       "docsPath": "docs/security-and-costs",
       "labs": []
     },

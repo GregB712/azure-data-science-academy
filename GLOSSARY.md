@@ -49,6 +49,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 - **Kind:** Azure service (tooling)
 - Cross-platform command-line interface for Azure Resource Manager and many data planes. Install inside WSL. See [Lab 01](labs/lab-01-azure-setup/README.md).
 
+### Azure Policy
+- **Kind:** Azure service
+- Rule engine that evaluates resources and applies an effect (audit, deny, append/modify, deployIfNotExists) to enforce guardrails such as allowed regions, required tags and no public access. Controls configuration, not spend. See [Landing zones and policy](docs/security-and-costs/01-landing-zones-and-policy.md).
+
 ### Azure Resource Manager (ARM)
 - **Kind:** Azure service
 - The control-plane API (`management.azure.com`) behind the portal, CLI, SDKs, Bicep and Terraform.
@@ -108,6 +112,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Control plane / data plane
 - **Kind:** Concept
 - Control plane manages resources (ARM, roles like Owner/Contributor). Data plane accesses the contents (blobs, secrets, model inference; roles like Storage Blob Data Reader). See [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md#32-control-plane-vs-data-plane-the-single-most-important-idea).
+
+### Customer-managed key (CMK)
+- **Kind:** Azure capability
+- Encrypting a service's data with a key you own in Key Vault (vs Microsoft-managed keys), so you control the key lifecycle - used when compliance requires it. See [Networking and secrets](docs/security-and-costs/02-networking-and-secrets.md).
 
 ### Data asset (Azure ML)
 - **Kind:** Azure capability
@@ -200,6 +208,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Federated computational governance
 - **Kind:** Pattern
 - Data mesh principle: global policies agreed by domain and central representatives, enforced automatically by the platform.
+
+### FinOps
+- **Kind:** Concept
+- Operational practice of making cloud cost visible, allocated and managed: tag-based cost allocation by domain/owner, budgets and alerts, idle-resource detection, and reservations for steady baselines. See [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md).
 
 ### Forecast accuracy (WAPE, MASE, bias)
 - **Kind:** Concept
@@ -324,6 +336,10 @@ Every term carries a **Kind** label: *Azure service*, *Azure capability* (featur
 ### Resource provider
 - **Kind:** Azure capability
 - Service namespace (e.g. `Microsoft.Storage`) that must be registered in a subscription before use.
+
+### Responsible AI dashboard
+- **Kind:** Azure capability
+- Azure ML tool combining error analysis (worst-performing cohorts), fairness (Fairlearn), interpretability (InterpretML) and a scorecard PDF, to debug and document a model before promotion. See [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md).
 
 ### Retraining trigger
 - **Kind:** Concept

@@ -58,7 +58,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** API keys for external data providers; Databricks secret scopes backed by Key Vault.
 - **Cost model:** Per operation (and per key for HSM-backed keys); very cheap at lab scale.
 - **Watch out:** Soft-deleted vaults keep the name reserved; purge if you need to reuse it. Prefer RBAC permission model.
-- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md)
+- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Networking and secrets](docs/security-and-costs/02-networking-and-secrets.md)
 - **Docs:** https://learn.microsoft.com/azure/key-vault/general/overview
 
 ### Azure Policy
@@ -69,7 +69,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Enforcing that every ML workspace has public network access disabled in prod.
 - **Cost model:** Free for Azure resources.
 - **Watch out:** Enterprise policies can block lab commands; read the error's policy name.
-- **Lessons:** Module 9 (planned)
+- **Lessons:** [Landing zones and policy as code](docs/security-and-costs/01-landing-zones-and-policy.md)
 - **Docs:** https://learn.microsoft.com/azure/governance/policy/overview
 
 ### Microsoft Cost Management
@@ -80,7 +80,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Budget alerts on lab RGs; cost per data product via tags.
 - **Cost model:** Free for Azure usage.
 - **Watch out:** Budgets alert but never stop spending; cost data lags 8–24 hours.
-- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Lab 01](labs/lab-01-azure-setup/README.md)
+- **Lessons:** [Azure fundamentals](docs/azure-fundamentals/01-azure-fundamentals.md), [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md), [Lab 01](labs/lab-01-azure-setup/README.md)
 - **Docs:** https://learn.microsoft.com/azure/cost-management-billing/costs/overview-cost-management
 
 ## Storage
@@ -240,7 +240,7 @@ Prices are deliberately described as cost *models*; always confirm current rates
 - **Typical DS/AI uses:** Finding trusted training data; requesting access to a data product; classification of PII.
 - **Cost model:** Varies by capability (data map, data quality, scanning); check current Purview pricing and licensing.
 - **Watch out:** Catalog quality depends on curation; automate product registration from code.
-- **Lessons:** [Data mesh](docs/data-mesh/01-data-mesh.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
+- **Lessons:** [Data mesh](docs/data-mesh/01-data-mesh.md), [Governance, RAI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md), [Lakehouse](docs/lakehouse/01-lake-warehouse-lakehouse-medallion.md)
 - **Docs:** https://learn.microsoft.com/purview/unified-catalog
 
 ## Machine learning and AI

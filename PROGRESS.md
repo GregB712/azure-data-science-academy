@@ -73,6 +73,12 @@ Two ways to track progress:
 - [ ] Read [Agents, evaluation and cost](docs/generative-ai/03-agents-evaluation-and-cost.md)
 - [ ] Ran the local RAG core (chunk, embed, retrieve, grounded prompt) and retrieval evaluation
 
+## Module 9: Enterprise architecture, security and governance
+- [ ] Read [Landing zones and policy](docs/security-and-costs/01-landing-zones-and-policy.md)
+- [ ] Read [Networking and secrets](docs/security-and-costs/02-networking-and-secrets.md)
+- [ ] Read [Governance, responsible AI and FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md)
+- [ ] Ran the tag checker and the monthly cost estimate (standing vs usage, by domain)
+
 ## Reference work
 - [ ] Wrote my first ADR using the [decision guide](ARCHITECTURE_DECISION_GUIDE.md) template
 

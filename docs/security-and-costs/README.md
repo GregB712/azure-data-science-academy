@@ -13,7 +13,14 @@ summary: Planned lessons on landing zones, environment separation, network isola
 
 # Module 9 Roadmap: Enterprise Architecture, Security and Governance
 
-**Status: planned.**
+**Module 9 is built.** Its lessons are written and verified (links below); the table records the original plan.
+
+**Module 9 (available):**
+- [9.1-9.2/9.6 Landing zones, environment separation and policy as code](01-landing-zones-and-policy.md)
+- [9.3-9.4 Network isolation and secrets (private endpoints, Key Vault)](02-networking-and-secrets.md)
+- [9.5/9.7-9.8 Governance (Purview), responsible AI and FinOps](03-governance-responsible-ai-finops.md)
+
+Runnable, offline governance/FinOps code is [`code/governance/`](../../code/governance/) (required-tag checker + monthly cost estimate with per-domain allocation); Azure-side steps (landing zones, private endpoints, Purview, the Responsible AI dashboard) are documented and verified but not run against a subscription. Module 9 has no separate lab.
 
 | # | Lesson | Key content | Official docs |
 |---|---|---|---|
