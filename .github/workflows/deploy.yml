@@ -1,15 +1,14 @@
 # Deploy infrastructure and the training schedule to Azure using OIDC (no secrets).
-# Illustrative: it runs only when the repo variables/secrets below are configured
-# and a federated credential is set up on an Entra app or user-assigned identity
-# (see docs/mlops/07-cicd-and-iac.md). client-id/tenant-id/subscription-id are
-# identifiers, not credentials; there is NO stored client secret.
+# Illustrative and OPT-IN: this runs only when you trigger it manually AND have
+# configured the OIDC variables below plus a federated credential on an Entra app
+# or user-assigned identity (see docs/mlops/07-cicd-and-iac.md). It is manual
+# (workflow_dispatch) on purpose, so it never fails on an unconfigured repo;
+# the job also skips if the variables are absent. client-id/tenant-id/
+# subscription-id are identifiers, not credentials; there is NO stored secret.
 name: deploy
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ["infra/**", "code/forecasting/**", ".github/workflows/deploy.yml"]
+  workflow_dispatch:     # manual, opt-in; wire a push/paths trigger once OIDC is set up
 
 permissions:
   id-token: write        # request the GitHub OIDC token (does NOT grant write to resources)
@@ -19,6 +18,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production        # add protection rules to this environment
+    # Skip cleanly if OIDC isn't configured, so a manual run can't fail on login.
+    if: ${{ vars.AZURE_CLIENT_ID != '' && vars.AZURE_TENANT_ID != '' && vars.AZURE_SUBSCRIPTION_ID != '' }}
     steps:
       - uses: actions/checkout@v4
 
