@@ -134,7 +134,7 @@
       "title": "End-to-End Capstone: Retail Demand Forecasting",
       "description": "Local baseline, medallion lakehouse, governed data products, Azure ML training pipeline, batch and online inference, monitoring and cost optimisation.",
       "estimatedHours": 20,
-      "status": "planned",
+      "status": "available",
       "docsPath": "projects/retail-demand-forecasting",
       "labs": [
         "lab-07-end-to-end-capstone"

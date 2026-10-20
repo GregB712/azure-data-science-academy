@@ -30,7 +30,7 @@ flowchart LR
   M1 --> M8["M8 GenAI ✅"]
   M7 --> M9["M9 Enterprise ✅"]
   M3b --> M9
-  M7 --> M10["M10 Capstone 🟡"]
+  M7 --> M10["M10 Capstone ✅"]
   M8 -.-> M10
 ```
 
@@ -49,7 +49,7 @@ Module 3 comes before Module 2 in this first version on purpose: it is the archi
 | 7 | MLOps and Production Operations | ✅ | 10 | [CI/CD + IaC](docs/mlops/07-cicd-and-iac.md) · [Pipelines + monitoring](docs/mlops/08-pipelines-and-monitoring.md) · [Retraining + lineage](docs/mlops/09-retraining-and-lineage.md) | Log Analytics ingestion, scheduled/serverless compute (scale-to-zero) |
 | 8 | Azure AI and Generative AI | ✅ | 10 | [Foundry & models](docs/generative-ai/01-foundry-models-and-inference.md) · [RAG & AI Search](docs/generative-ai/02-rag-and-ai-search.md) · [Agents, eval & cost](docs/generative-ai/03-agents-evaluation-and-cost.md) | **AI Search bills hourly**, tokens (local RAG core is free) |
 | 9 | Enterprise Architecture, Security and Governance | ✅ | 8 | [Landing zones & policy](docs/security-and-costs/01-landing-zones-and-policy.md) · [Networking & secrets](docs/security-and-costs/02-networking-and-secrets.md) · [Governance, RAI & FinOps](docs/security-and-costs/03-governance-responsible-ai-finops.md) | Private endpoints, Purview (local governance/FinOps code is free) |
-| 10 | End-to-End Capstone | 🟡 | 20 | [Capstone](projects/retail-demand-forecasting/README.md) · Lab 07 planned | All of the above, briefly |
+| 10 | End-to-End Capstone | ✅ | 20 | [Capstone](projects/retail-demand-forecasting/README.md) · [Lab 07](labs/lab-07-end-to-end-capstone/README.md) | All of the above, briefly (local run is free) |
 
 ## Reference material (available)
 

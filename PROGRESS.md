@@ -87,7 +87,11 @@ Two ways to track progress:
 - [ ] Stage 2 lakehouse running locally
 - [ ] Stage 2 lakehouse running on ADLS Gen2
 - [ ] Stage 3 contracts for all published products
+- [ ] Stage 4 model trained, backtested and gated (Module 5-6)
 - [ ] Stage 5 forecast product `gold/demand_forecast` produced and served (Module 6)
+- [ ] Stage 6 incremental, monitoring and cost estimate (Module 7, 9)
+- [ ] Completed [Lab 07: end-to-end capstone](labs/lab-07-end-to-end-capstone/README.md) (full local run + `pytest`)
+- [ ] Wrote the portfolio verified-vs-designed note
 
 ## Notes
 <!-- Dates, blockers, questions, links to your own repos -->
