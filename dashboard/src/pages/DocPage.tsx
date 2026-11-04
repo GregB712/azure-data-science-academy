@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { content } from '../content/load'
 import type { Doc } from '../content/model'
 import MarkdownView from '../components/MarkdownView'
-import { Badge, DocLink, ProgressBar, StatusBadge, TYPE_LABEL } from '../components/ui'
+import { Badge, DocLink, Icon, ProgressBar, StatusBadge, TYPE_LABEL } from '../components/ui'
 import { checklistDone, isComplete, isTrackable, progressStore, useProgress } from '../lib/progress'
 import { docHref, fileHref } from '../lib/links'
 import { dirname } from '../lib/paths'
@@ -103,14 +103,14 @@ export default function DocPage({ route, section }: { route: string; section: st
         <div className="doc-meta">
           <span className="pill">{TYPE_LABEL[doc.type]}</span>
           <StatusBadge status={doc.status} />
-          {doc.duration && <Badge>⏱ {doc.duration}</Badge>}
+          {doc.duration && <Badge><Icon name="clock" /> {doc.duration}</Badge>}
           {doc.level && <Badge>{doc.level}</Badge>}
         </div>
         {doc.summary && <p className="lead">{doc.summary}</p>}
         <div className="doc-actions">
           {isTrackable(doc) && (
             <button type="button" className={`btn ${complete ? 'done' : 'primary'}`} onClick={() => progressStore.toggleComplete(doc.id)}>
-              {complete ? '✓ Completed (undo)' : 'Mark as complete'}
+              {complete ? <><Icon name="check" /> Completed (undo)</> : 'Mark as complete'}
             </button>
           )}
           {exercise && <a className="btn" href={docHref(doc.route, exercise.slug)}>Exercise</a>}
@@ -151,8 +151,8 @@ export default function DocPage({ route, section }: { route: string; section: st
 
       {(prev || next) && (
         <nav className="prev-next" aria-label="Previous and next">
-          {prev ? <a className="card" href={docHref(prev.route)}><span className="small muted">← Previous</span><strong>{prev.title}</strong></a> : <span />}
-          {next ? <a className="card next" href={docHref(next.route)}><span className="small muted">Next →</span><strong>{next.title}</strong></a> : <span />}
+          {prev ? <a className="card" href={docHref(prev.route)}><span className="small muted">Previous</span><strong>{prev.title}</strong></a> : <span />}
+          {next ? <a className="card next" href={docHref(next.route)}><span className="small muted">Next</span><strong>{next.title}</strong></a> : <span />}
         </nav>
       )}
     </div>

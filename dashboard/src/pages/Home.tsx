@@ -1,5 +1,5 @@
 import { content } from '../content/load'
-import { CompletionMark, ProgressBar, StatusBadge, TYPE_LABEL } from '../components/ui'
+import { Icon, ProgressBar, ProgressRing, StatusBadge, TYPE_LABEL } from '../components/ui'
 import { docHref } from '../lib/links'
 import { isComplete, moduleDocs, progressFor, useProgress } from '../lib/progress'
 
@@ -25,23 +25,36 @@ export default function Home() {
   return (
     <div className="page home">
       <section className="hero">
-        <div>
-          <h1>{curriculum.title}</h1>
+        <div className="hero-copy">
+          <h1 className="large-title">{curriculum.title}</h1>
           <p className="lead">{curriculum.tagline}</p>
           <p className="muted">{curriculum.sequence}</p>
+        </div>
+        <div className="up-next">
+          <ProgressRing pct={overall.pct} label="Overall course progress" />
+          <div className="up-next-body">
+            {next ? (
+              <>
+                <span className="up-next-kicker">{overall.done === 0 ? 'Start here' : 'Up next'}</span>
+                <a className="up-next-title" href={docHref(next.route)}>{next.title}</a>
+                <span className="small muted">
+                  {TYPE_LABEL[next.type]}
+                  {next.duration ? `, ${next.duration}` : ''}
+                </span>
+              </>
+            ) : (
+              <span className="up-next-title">Every available item is complete</span>
+            )}
+            <span className="small muted">
+              {overall.done} of {overall.total} available lessons, labs and projects completed.{' '}
+              <a href="#/progress">Progress details</a>
+            </span>
+          </div>
           {next && (
-            <a className="btn primary" href={docHref(next.route)}>
-              {overall.done === 0 ? 'Start' : 'Continue'}: {next.title}
+            <a className="btn primary large" href={docHref(next.route)}>
+              {overall.done === 0 ? 'Start' : 'Continue'}
             </a>
           )}
-        </div>
-        <div className="hero-progress card">
-          <div className="big-number">{overall.pct}%</div>
-          <ProgressBar pct={overall.pct} label="Overall course progress" />
-          <p className="small muted">
-            {overall.done} of {overall.total} available lessons, labs and projects completed
-          </p>
-          <a className="small" href="#/progress">Progress details, export and import →</a>
         </div>
       </section>
 
@@ -57,15 +70,23 @@ export default function Home() {
       <section>
         <h2>Recommended sequence</h2>
         <ol className="sequence">
-          {path.map((d, i) => (
-            <li key={d!.id} className={d!.status === 'planned' ? 'planned' : ''}>
-              <span className="seq-num">{i + 1}</span>
-              <a href={docHref(d!.route)}>{d!.title}</a>
-              <span className="muted small">{TYPE_LABEL[d!.type]}</span>
-              {d!.status !== 'available' && <StatusBadge status={d!.status} />}
-              <CompletionMark doc={d!} />
-            </li>
-          ))}
+          {path.map((d, i) => {
+            const done = isComplete(d!, s)
+            const current = d!.id === next?.id
+            return (
+              <li key={d!.id} className={`${d!.status === 'planned' ? 'planned' : ''} ${done ? 'done' : ''} ${current ? 'current' : ''}`}>
+                <span className="seq-node" aria-hidden>{done ? <Icon name="check" /> : i + 1}</span>
+                <div className="seq-body">
+                  <a href={docHref(d!.route)} aria-current={current ? 'step' : undefined}>{d!.title}</a>
+                  <span className="seq-meta">
+                    <span className="muted small">{TYPE_LABEL[d!.type]}</span>
+                    {d!.status !== 'available' && <StatusBadge status={d!.status} />}
+                    {done && <span className="visually-hidden">Completed</span>}
+                  </span>
+                </div>
+              </li>
+            )
+          })}
         </ol>
       </section>
 
@@ -85,7 +106,7 @@ export default function Home() {
                 <h3>{first ? <a href={docHref(first.route)}>{m.title}</a> : m.title}</h3>
                 <p className="small">{m.description}</p>
                 <footer>
-                  <span className="small muted">≈ {m.estimatedHours} h</span>
+                  <span className="small muted"><Icon name="clock" /> {m.estimatedHours} h</span>
                   {p.total > 0 ? (
                     <>
                       <ProgressBar pct={p.pct} label={`Module ${m.number} progress`} />
@@ -111,7 +132,7 @@ export default function Home() {
               {recent.map((r) => (
                 <li key={r.id}>
                   <a href={docHref(r.doc!.route)}>{r.doc!.title}</a>{' '}
-                  <span className="small muted">{new Date(r.at).toLocaleString()}</span>
+                  <span className="small muted">{new Date(r.at).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</span>
                 </li>
               ))}
             </ul>

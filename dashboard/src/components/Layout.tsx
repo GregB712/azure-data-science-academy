@@ -1,45 +1,53 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { AuthControls, GuestBanner } from '../auth/clerk'
 import { content } from '../content/load'
 import { docHref } from '../lib/links'
 import { navigate, useRoute } from '../lib/router'
 import { setTheme, useTheme } from '../lib/theme'
-import { CompletionMark } from './ui'
+import { CompletionMark, Icon } from './ui'
+import { useDrawerGesture } from './drawerGesture'
 
 const NAV = [
-  { href: '#/', label: 'Dashboard', page: '' },
-  { href: '#/catalog', label: 'Lesson catalog', page: 'catalog' },
-  { href: '#/labs', label: 'Lab tracker', page: 'labs' },
-  { href: '#/architecture', label: 'Architecture explorer', page: 'architecture' },
-  { href: '#/services', label: 'Service lookup', page: 'services' },
-  { href: '#/glossary', label: 'Glossary', page: 'glossary' },
-  { href: '#/search', label: 'Search', page: 'search' },
-  { href: '#/progress', label: 'My progress', page: 'progress' },
+  { href: '#/', label: 'Dashboard', page: '', icon: 'home' },
+  { href: '#/catalog', label: 'Lesson catalog', page: 'catalog', icon: 'books' },
+  { href: '#/labs', label: 'Lab tracker', page: 'labs', icon: 'flask' },
+  { href: '#/architecture', label: 'Architecture explorer', page: 'architecture', icon: 'layers' },
+  { href: '#/services', label: 'Service lookup', page: 'services', icon: 'cloud' },
+  { href: '#/glossary', label: 'Glossary', page: 'glossary', icon: 'text' },
+  { href: '#/search', label: 'Search', page: 'search', icon: 'search' },
+  { href: '#/progress', label: 'My progress', page: 'progress', icon: 'chart' },
 ]
+
+const DOC_ICON: Record<string, string> = { lab: 'flask', 'module-overview': 'map', project: 'flag' }
 
 const REFERENCE_IDS = [
   'course-map', 'architecture-decision-guide', 'service-catalog', 'glossary',
   'command-cheatsheet', 'official-docs', 'extending-the-academy', 'progress',
 ]
 
-function Sidebar({ onNavigate }: { onNavigate: () => void }) {
+function Sidebar({ onNavigate, open: drawerOpen }: { onNavigate: () => void; open: boolean }) {
   const route = useRoute()
+  const ref = useRef<HTMLElement>(null)
+  useDrawerGesture(ref, drawerOpen, onNavigate)
   const currentRoute = route.page === 'doc' ? route.rest : ''
   const [open, setOpen] = useState<Record<number, boolean>>({ 1: true, 3: true })
 
   return (
-    <nav className="sidebar" aria-label="Course navigation" onClick={(e) => (e.target as HTMLElement).closest('a') && onNavigate()}>
+    <nav ref={ref} className="sidebar" aria-label="Course navigation" onClick={(e) => (e.target as HTMLElement).closest('a') && onNavigate()}>
       <a className="brand" href="#/">
-        <span className="brand-mark" aria-hidden>A</span>
-        <span>
-          <strong>Azure Data Science Academy</strong>
-          <small>v{content.curriculum.version}</small>
+        <span className="brand-mark" aria-hidden>
+          <svg viewBox="0 0 64 64"><path d="M18 46 30 16h6l12 30h-7l-3-8H28l-3 8zm12-14h6l-3-9z" fill="currentColor" /></svg>
+        </span>
+        <span className="brand-text">
+          <strong>Data Science Academy</strong>
+          <small>Azure · v{content.curriculum.version}</small>
         </span>
       </a>
       <ul className="nav-list">
         {NAV.map((n) => (
           <li key={n.href}>
-            <a href={n.href} className={route.page === n.page ? 'active' : ''}>
+            <a href={n.href} className={route.page === n.page ? 'active' : ''} aria-current={route.page === n.page ? 'page' : undefined}>
+              <Icon name={n.icon} />
               {n.label}
             </a>
           </li>
@@ -61,7 +69,7 @@ function Sidebar({ onNavigate }: { onNavigate: () => void }) {
                 aria-expanded={expanded}
                 onClick={() => setOpen({ ...open, [m.number]: !expanded })}
               >
-                <span className="chev" aria-hidden>{expanded ? '▾' : '▸'}</span>
+                <Icon name="chevron" className="chev" />
                 <span className="mod-num">{m.number}</span>
                 <span className="mod-title">{m.title}</span>
                 {m.status !== 'available' && <span className="mod-status">{m.status}</span>}
@@ -71,9 +79,9 @@ function Sidebar({ onNavigate }: { onNavigate: () => void }) {
                   {docs.length === 0 && <li className="muted small">Content planned</li>}
                   {docs.map((d) => (
                     <li key={d.id}>
-                      <a href={docHref(d.route)} className={d.route === currentRoute ? 'active' : ''}>
-                        {d.type === 'lab' ? '🧪 ' : d.type === 'module-overview' ? '🗺 ' : d.type === 'project' ? '🏁 ' : ''}
-                        {d.title.replace(/^Lab \d+: /, 'Lab: ')}
+                      <a href={docHref(d.route)} className={d.route === currentRoute ? 'active' : ''} aria-current={d.route === currentRoute ? 'page' : undefined}>
+                        <Icon name={DOC_ICON[d.type] ?? 'doc'} />
+                        <span className="nav-label">{d.title.replace(/^Lab \d+: /, 'Lab: ')}</span>
                         <CompletionMark doc={d} />
                       </a>
                     </li>
@@ -89,13 +97,13 @@ function Sidebar({ onNavigate }: { onNavigate: () => void }) {
       <ul className="nav-list compact">
         {REFERENCE_IDS.map((id) => content.byId.get(id)).filter(Boolean).map((d) => (
           <li key={d!.id}>
-            <a href={docHref(d!.route)} className={d!.route === currentRoute ? 'active' : ''}>
-              {d!.title}
+            <a href={docHref(d!.route)} className={d!.route === currentRoute ? 'active' : ''} aria-current={d!.route === currentRoute ? 'page' : undefined}>
+              <span className="nav-label">{d!.title}</span>
             </a>
           </li>
         ))}
         <li>
-          <a href={docHref('README')}>About this academy (README)</a>
+          <a href={docHref('README')}><span className="nav-label">About this academy</span></a>
         </li>
       </ul>
     </nav>
@@ -107,8 +115,25 @@ export default function Layout({ children }: { children: ReactNode }) {
   const route = useRoute()
   const theme = useTheme()
   const [q, setQ] = useState('')
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => setMenuOpen(false), [route.page, route.rest])
+
+  // The top bar's hairline only appears once content actually slides under it.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Escape always offers a way out of the drawer.
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
 
   const submit = (e: FormEvent) => {
     e.preventDefault()
@@ -120,14 +145,15 @@ export default function Layout({ children }: { children: ReactNode }) {
       <a className="skip-link" href="#main" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus() }}>
         Skip to content
       </a>
-      <Sidebar onNavigate={() => setMenuOpen(false)} />
+      <Sidebar open={menuOpen} onNavigate={() => setMenuOpen(false)} />
       <div className="backdrop" onClick={() => setMenuOpen(false)} aria-hidden />
       <div className="main-col">
-        <header className="topbar">
-          <button type="button" className="menu-btn" aria-label="Open navigation" onClick={() => setMenuOpen(!menuOpen)}>
-            ☰
+        <header className={`topbar ${scrolled ? 'scrolled' : ''}`}>
+          <button type="button" className="menu-btn" aria-label="Open navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+            <Icon name="menu" />
           </button>
           <form className="top-search" role="search" onSubmit={submit}>
+            <Icon name="search" className="search-glyph" />
             <input
               type="search"
               placeholder="Search lessons, labs, services, commands…"
@@ -143,7 +169,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
             title="Toggle theme"
           >
-            {theme === 'dark' ? '☀' : '☾'}
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
           </button>
           <AuthControls />
         </header>

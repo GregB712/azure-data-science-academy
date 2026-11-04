@@ -51,7 +51,7 @@ export default function Catalog({ params }: { params: URLSearchParams }) {
               <span className="pill">{TYPE_LABEL[d.type]}</span>
               {d.module !== undefined && <span className="pill">Module {d.module}</span>}
               <StatusBadge status={d.status} />
-              {d.duration && <span className="small muted">⏱ {d.duration}</span>}
+              {d.duration && <span className="small muted">{d.duration}</span>}
               <CompletionMark doc={d} />
             </div>
             <strong>{d.title}</strong>
